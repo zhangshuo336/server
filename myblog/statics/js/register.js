@@ -73,23 +73,14 @@ function check_uname(){
 	    check_catcode();
 	})
 
-
-
-
-
-
-
-
-
-
-	$('.catbut').click(function(){
-	   if(error_piccatcode == false && error_name == false && error_password == false
-	   && error_check_password == false && error_email == false && error_check == false)
+function sendMailCode(){
+        if(error_piccatcode == false && error_name == false && error_password == false
+	    && error_check_password == false && error_email == false && error_check == false)
         {
         var addr = $('#email').val();
         $.get('/sendCode/','mailAddr=' + addr,function(data){
         if(data == 1){
-        $('.catbut').next().html('验证码已经发送到您的邮箱');
+        $('.catbut').next().html('验证码已经发送到邮箱10分钟内有效');
         $('.catbut').next().css('color','green');
         $('.catbut').next().show();
         }
@@ -105,7 +96,44 @@ function check_uname(){
         $('.catbut').next().css('color','#e62e2e');
         $('.catbut').next().show();
         }
+}
+
+
+
+
+function countDown() {
+sendMailCode();
+$('.catbut').unbind('click');
+var timer = setInterval(function(){
+    i = i - 1;
+    $('.catbut').html("("+i+"s)");
+    $('.catbut').css({'color':'#A7A7A7','backgroundColor':'#D6D6D6','cursor':'default'})
+    if (i == 0) {
+        clearInterval(timer);
+        $('.catbut').html("重新发送");
+        $('.catbut').css({'color':'#55991A','backgroundColor':'#f8f8f8','cursor':'pointer'})
+        $('.catbut').bind('click',function(){countDown();})
+        i = 60;
+        return;
+    }
+    },1000);
+}
+
+
+    var i = 60;
+	$('.catbut').click(function(){
+	if(error_piccatcode == false && error_name == false && error_password == false
+	    && error_check_password == false && error_email == false && error_check == false){
+        countDown();}
+     else{
+        $('.catbut').next().html('请将基本信息填写完全在获取验证码');
+        $('.catbut').next().css('color','#e62e2e');
+        $('.catbut').next().show();
+        }
 	})
+
+
+
 
 	$('#allow').click(function() {
 		if($(this).is(':checked'))
@@ -149,7 +177,7 @@ function check_uname(){
 		{
 			$('#pwd').next().hide();
 			error_password = false;
-		}		
+		}
 	}
 
 
@@ -167,8 +195,8 @@ function check_uname(){
 		{
 			$('#cpwd').next().hide();
 			error_check_password = false;
-		}		
-		
+		}
+
 	}
 
 	function check_email(){
@@ -214,7 +242,6 @@ function check_uname(){
     $('#email').focus(function(){$(this).next().hide();})
     $('#piccatcode').focus(function(){$(this).next().next().hide();})
     $('#catcode').focus(function(){$(this).next().next().hide();})
-
 
 
     function check_catcode(){

@@ -42,7 +42,7 @@ INSTALLED_APPS = (
     'artDataApp',
     'tinymce',
     'picApp',
-    'tonApp'
+    'tonApp',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -96,7 +96,6 @@ TINYMCE_DEFAULT_CONFIG = {
     'width': 600,
     'height': 400,
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

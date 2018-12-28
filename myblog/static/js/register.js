@@ -73,23 +73,14 @@ function check_uname(){
 	    check_catcode();
 	})
 
-
-
-
-
-
-
-
-
-
-	$('.catbut').click(function(){
-	   if(error_piccatcode == false && error_name == false && error_password == false
-	   && error_check_password == false && error_email == false && error_check == false)
+function sendMailCode(){
+        if(error_piccatcode == false && error_name == false && error_password == false
+	    && error_check_password == false && error_email == false && error_check == false)
         {
         var addr = $('#email').val();
         $.get('/sendCode/','mailAddr=' + addr,function(data){
         if(data == 1){
-        $('.catbut').next().html('验证码已经发送到您的邮箱');
+        $('.catbut').next().html('验证码已经发送');
         $('.catbut').next().css('color','green');
         $('.catbut').next().show();
         }
@@ -105,7 +96,41 @@ function check_uname(){
         $('.catbut').next().css('color','#e62e2e');
         $('.catbut').next().show();
         }
+}
+
+
+
+
+function countDown() {
+alert('2')
+    i = i - 1;
+    $(this).html("("+i+"s)").addClass('ucatbut');
+    if (i == 0) {
+        $(".catbut").html("重新发送");
+        $(this).addClass('catbut');
+        $(this).bind('click',function(){;})
+        flag = 1;
+        i = 60;
+        return;
+    }
+
+}
+
+
+
+	$('.catbut').click(function(){
+	alert('3');
+	sendMailCode();
+	$(this).unbind('click');
+	var flag = 1;
+    var i = 60;
+    alert('1');
+    setTimeout(countDown(),1000);
+
 	})
+
+
+
 
 	$('#allow').click(function() {
 		if($(this).is(':checked'))
@@ -214,7 +239,6 @@ function check_uname(){
     $('#email').focus(function(){$(this).next().hide();})
     $('#piccatcode').focus(function(){$(this).next().next().hide();})
     $('#catcode').focus(function(){$(this).next().next().hide();})
-
 
 
     function check_catcode(){

@@ -16,6 +16,9 @@
 		if({{unameerror}}==1)
         {$('.user_error').html('用户名不存在').show();}
 		else{$('.user_error').hide();}
+
+		$('#username').focus(function(){$(this).next().hide();})
+		$('#pwd').focus(function(){$(this).next().hide();})
 		})
     </script>
 
@@ -32,9 +35,9 @@
 				<div class="form_input">
 					<form id="login_form" method="post" action="{%url 'htmlPageApp:checkPassword'%}">
                         {%csrf_token%}
-						<input value="{{uname}}" type="text" name="username" class="name_input" placeholder="请输入用户名">
+						<input value="{{uname}}" type="text" name="username" id="username" class="name_input" placeholder="请输入用户名">
 						<div class="user_error">输入错误</div>
-						<input value="{{passwd}}" type="password" name="pwd" class="pass_input" placeholder="请输入密码">
+						<input value="{{passwd}}" type="password" name="pwd" id="pwd" class="pass_input" placeholder="请输入密码">
 						<div class="pwd_error">输入错误</div>
                         <input type="text" class="cat_input" placeholder="输入验证码"><div class="cat_but"><img src="/loginVerify/?1" alt="验证码"></div>
 						<div class="cat_error">输入错误</div>

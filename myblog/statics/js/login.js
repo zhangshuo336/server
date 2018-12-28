@@ -49,9 +49,16 @@ function check_code(){
         }
     });}
     }
+
+
+
+
+
+
 $(function(){
+
     $('.cat_but').click(function(){changeCode();})
-    $('.cat_input').change(function(){check_code();})
+    $('.cat_input').keyup(function(){check_code();})
     $('.login_form').submit(function(){
         if(error_catcode == false){return true;}
         else{return false;}

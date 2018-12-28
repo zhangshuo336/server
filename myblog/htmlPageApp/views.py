@@ -17,12 +17,25 @@ from hashlib import sha1
 
 
 
-# Create your views here.
+# 装饰器用于对用户登陆状态的检测
+def loginTest(func):
+    def loginCheck(request,*args,**kwargs):
+        if request.session.has_key('uname'):
+            return func(request,*args,**kwargs)
+        else:
+            red = HttpResponseRedirect(reverse('htmlPageApp:logins'))
+            red.set_cookie('url',request.get_full_path())
+            return red
+    return loginCheck
+
+
+# 返回前端首页并传递最新年的5条数据
 def index(request):
     artDataList = ArtData.objects.order_by('-id')[0:5]
     content = {'artDataList':artDataList,'pageTitle':'七月-首页'}
     return render(request,'index.html',content)
 
+# 返回各板块列表页并根据列表页的不同确定显示内容
 def listPage(request,pagenum,sortnum):
         dataList = ArtData.objects.filter(artDivide=int(sortnum))
         paginator = Paginator(dataList,3)
@@ -38,25 +51,26 @@ def listPage(request,pagenum,sortnum):
 
 
 
-
+# 显示每条数据的详细信息
+@loginTest
 def details(request,idnum):
     data = ArtData.objects.get(pk=int(idnum))
     content = {'data':data}
     return render(request,'detail.html',content)
 
-
+# 返回注册页
 def registers(request):
     return render(request,'register.html')
 
 
 
 
-
+# 返回登陆页
 def logins(request):
     return render(request,'login.html')
 
 
-
+# 生成验证码图片并传回前端
 def verify(request):
     str,pic = picChecker().createChecker()
     request.session['verify'] = str
@@ -64,7 +78,7 @@ def verify(request):
     pic.save(buf,'png')
     return HttpResponse(buf.getvalue(),'image/png')
 
-
+# 对前端传回的验证码进行判断
 def verifyTest(request):
     userCode = request.GET['piccatcode']
     sessionCode = request.session.get('verify',uuid.uuid4())
@@ -73,7 +87,7 @@ def verifyTest(request):
     else:
         return HttpResponse(0)
 
-
+# 发送邮箱验证码工具函数
 def mailCode(addr):
     emailAddr = addr
     my_sender = 'qiyuemail@126.com'  # 发件人邮箱账号
@@ -95,6 +109,7 @@ def mailCode(addr):
     except Exception as e:
         return False
 
+# 发送邮箱验证码逻辑调用工具函数发送验证码由于存在发送失败的情况利用循环保证发送成功
 def sendCode(request):
     addr = request.GET['mailAddr']
     for i in range(5):
@@ -104,15 +119,17 @@ def sendCode(request):
             request.session['timeOut'] =time.time()
             return HttpResponse(1)
         else:
+            # 最多尝试4次若都失败将通知前端
             if i<4:
                 time.sleep(0.8)
             else:
                 return HttpResponse(0)
 
-
+# 核对前端提供的邮箱验证码的正确性
 def checkMailCode(request):
     userCode = request.GET['mailCode']
     timeOut = time.time() - request.session.get('timeOut',0)
+    # 这里定义验证码的有效期最多位10分钟
     if timeOut>600:
         del request.session['mailCode']
         return HttpResponse(0)
@@ -123,7 +140,7 @@ def checkMailCode(request):
         return HttpResponse(0)
 
 
-
+# 用户注册逻辑
 def userRegister(request):
     userName = request.POST['user_name']
     password = request.POST['pwd']
@@ -145,14 +162,14 @@ def userRegister(request):
     return HttpResponseRedirect(reverse('htmlPageApp:logins'))
 
 
-
+# 核对用户名是否存在
 def checkUname(request):
     uname = request.GET['uname']
     data = User.objects.filter(userName=uname).count()
     return JsonResponse({'data':data})
 
 
-
+# 执行登陆逻辑判断验证账号密码的存在以及正确性判断用户是否让浏览器记住用户名
 def checkPassword(request):
     uname = request.POST['username']
     passwd = request.POST['pwd']
@@ -162,7 +179,6 @@ def checkPassword(request):
         mysha1 = sha1()
         mysha1.update(passwd)
         passwd2 = mysha1.hexdigest()
-
         if passwd1 == passwd2:
             if flag:
                 userurl = request.COOKIES.get('url','/')
@@ -189,12 +205,12 @@ def checkPassword(request):
         content = {'uname':uname,'passwd':passwd,'pwderror':0,'unameerror':1}
         return render(request, 'login.html', content)
 
-
+# 用户注销登陆
 def backUp(request):
     request.session.flush()
     return HttpResponseRedirect(reverse('htmlPageApp:index'))
 
-
+# 生成登陆时的验证码图片并传回前端
 def loginVerify(request):
     str, pic = picChecker().createChecker()
     request.session['loginVerify'] = str
@@ -202,6 +218,7 @@ def loginVerify(request):
     pic.save(buf, 'png')
     return HttpResponse(buf.getvalue(), 'image/png')
 
+# 登陆验证码的判断视图
 def loginVerifyTest(request):
     userCode = request.GET['user_code']
     sessionCode = request.session['loginVerify']
@@ -209,35 +226,3 @@ def loginVerifyTest(request):
         return HttpResponse(1)
     else:
         return HttpResponse(0)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# 如果 try 中的语句没有执行，则会执行下面的 ret=False
-
-
-

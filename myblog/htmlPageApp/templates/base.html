@@ -40,7 +40,14 @@
 				<li><a href="{%url 'htmlPageApp:listPage' 1 1%}" >读书笔记</a></li>
 				<li>图片分享</li>
 				<li>关于我</li>
-				<li class=""><form><input type="text" name="search"><input type="submit" value="搜索"></form></li>
+				<li>
+                    <div class="box2">
+	                    <form method='get' action="/search/" target="_blank">
+                            {%csrf_token%}
+		                    <input type="text" placeholder="输入你想要找的内容..." name="q" class="searchItem"><input type="submit" value="搜索" class="submitBut">
+	                    </form>
+                    </div>
+                </li>
 			</ul>
 		</div>
 		</div>

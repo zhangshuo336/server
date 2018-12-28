@@ -10,8 +10,7 @@ from django.core.urlresolvers import reverse
 from blogUserApp.models import User
 from hashlib import sha1
 from task import *
-import json
-import pickle
+from django.views.decorators.cache import cache_page
 
 # 装饰器用于对用户登陆状态的检测
 def loginTest(func):
@@ -26,6 +25,7 @@ def loginTest(func):
 
 
 # 返回前端首页并传递最新年的5条数据
+@cache_page(60*5)
 def index(request):
     artDataList = ArtData.objects.order_by('-id')[0:5]
     content = {'artDataList':artDataList,'pageTitle':'七月-首页'}
@@ -55,6 +55,7 @@ def details(request,idnum):
     return render(request,'detail.html',content)
 
 # 返回注册页
+@cache_page(60*60)
 def registers(request):
     return render(request,'register.html')
 
@@ -62,6 +63,7 @@ def registers(request):
 
 
 # 返回登陆页
+@cache_page(60*60)
 def logins(request):
     return render(request,'login.html')
 

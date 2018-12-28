@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+{%block content1%}
+{%if data.artDivide == 0%}
+<div class="arttitle"><div class="newart">技术分享</div></div>
+{%elif data.artDivide == 1%}
+<div class="arttitle"><div class="newart">读书笔记</div></div>
+{%endif%}
+		<!-- 后台填数据需要重复的部分 -->
+
+	<div class="artbox">
+		<hr>
+		<div class="artdetail">
+		<h2>{{data.artTitle}}</h2>
+		<h3>{{data.artFTitle}}</h3>
+		{{data.art|safe}}
+
+			<!-- 这里填详情数据 -->
+		</div>
+		<!-- 这个hr是最后一个起美观作用的不包含在每一个文章元素内 -->
+		<hr>
+	</div>
+{%endblock content1%}

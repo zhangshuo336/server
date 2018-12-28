@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>七月-注册</title>
+	<link rel="stylesheet" type="text/css" href="/statics/css/register.css">
+	<link rel="stylesheet" type="text/css" href="/statics/css/reset.css">
+	<link rel="shortcut icon" href="/statics/images/favicon.ico" />
+	<script type="text/javascript" src="/statics/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="/statics/js/register.js"></script>
+</head>
+<body>
+	<div class="body">
+		<div class="reg">
+			<div class="regtitle">
+				<div class="signin">注册</div><div class="login"><a href="{%url 'htmlPageApp:logins'%}"> 登录</a></div>
+			</div>
+
+			<div class="regbox clearfix">
+				<form id="reg_form" method="post" action="{%url 'htmlPageApp:userRegister'%}">
+					{% csrf_token %}
+				<ul>
+					<li>
+						<label>用户名:</label>
+						<input placeholder="请输入用户名" type="text" name="user_name" id="user_name">
+						<span class="error_tip">提示信息</span>
+					</li>
+
+					<li>
+						<label>密码:</label>
+						<input placeholder="请输入密码" type="password" name="pwd" id="pwd">
+						<span class="error_tip">提示信息</span>
+					</li>
+
+					<li>
+						<label>确认密码:</label>
+						<input placeholder="确认密码" type="password" name="cpwd" id="cpwd">
+						<span class="error_tip">提示信息</span>
+					</li>
+
+					<li>
+						<label>邮箱:</label>
+						<input placeholder="输入邮箱" type="text" name="email" id="email">
+						<span class="error_tip">提示信息</span>
+					</li>
+
+					<li>
+						<label>验证码:</label>
+						<input placeholder="输入验证码不区分大小写" type="text" name="piccatcode" id="piccatcode"><div class="piccatbut"><img src="/verify/?1"></div>
+						<span class="error_tip">提示信息</span>
+					</li>
+
+					<li>
+						<label>验证码:</label>
+						<input placeholder="输入邮箱验证码" type="text" name="catcode" id="catcode"><div class="catbut">获取验证码</div>
+						<span class="error_tip">提示信息</span>
+					</li>
+
+					<li class="agreement">
+						<input type="checkbox" name="allow" id="allow" checked="checked">
+						<label>同意”七月用户协议“</label>
+						<span class="error_tip2">提示信息 </span>
+					</li>
+
+					<li class="reg_sub">
+						<input type="submit" value="注 册" name="">
+					</li>
+
+				</ul>				
+				</form>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

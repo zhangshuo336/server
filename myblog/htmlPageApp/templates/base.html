@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{pageTitle}}</title>
+	<link rel="stylesheet" type="text/css" href="/statics/css/index.css">
+	<link rel="stylesheet" type="text/css" href="/statics/css/reset.css">
+	<link rel="shortcut icon" href="/statics/images/favicon.ico" />
+	<script type="text/javascript" src="/statics/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="/statics/js/index.js"></script>
+</head>
+<body>
+<div class="body">
+	<div class="head">
+		<div class="eyebrow">
+{%if request.session.uname|default:'' != ''%}
+			<div class="eyebrow_content">
+			<div class="welcome">欢迎来到七月！</div>
+                <a href="{%url 'htmlPageApp:backUp'%}"><div class="signin sign">注销</div></a>
+			<div class="signin sign">{{request.session.uname}}</div>
+			<div class="signout sign">你好:</div>
+
+			</div>
+			{%else%}
+			<div class="eyebrow_content">
+			<div class="welcome">欢迎来到七月！</div>
+			<a href="{%url 'htmlPageApp:registers'%}"><div class="signout sign signhover"> 注册</div></a>
+			<span class="signline">|</span>
+				<a href="{%url 'htmlPageApp:logins'%}"><div class="signin sign signhover">登录</div></a>
+			</div>
+			{%endif%}
+
+		</div>
+		<div class="eye"><img src="/statics/images/banner.png" alt="banner"></div>
+		<div class="nav">
+			<div class="nav_content">
+			<ul class="nav_item">
+                <li><a href="{%url 'htmlPageApp:index'%}" >首页</a></li>
+                <li><a href="{%url 'htmlPageApp:listPage' 1 0%}" >技术分享</a></li>
+				<li><a href="{%url 'htmlPageApp:listPage' 1 1%}" >读书笔记</a></li>
+				<li>图片分享</li>
+				<li>关于我</li>
+				<li class=""><form><input type="text" name="search"><input type="submit" value="搜索"></form></li>
+			</ul>
+		</div>
+		</div>
+	</div>
+
+
+
+	<hr class="headhr">
+
+
+
+
+
+
+
+
+<div class="content">
+
+
+	<!-- 左侧内容 -->
+	<div class="bodyleft bodycontent">
+        <!--填充内容的区域-->
+        {%block content1%}
+        {%endblock content1%}
+
+
+
+
+
+
+
+
+
+</div>
+<!-- 右侧内容 -->
+	<div class="bodyright bodycontent">
+
+		<div class="private">
+			<div class="privatebox">
+			<p>我的名片</p>
+			<hr>
+			<p class="rightboxcontent">现居住地：北京海淀</p>
+			<p class="rightboxcontent">职业：</p>
+			<p class="rightboxcontent">邮箱：qiyuemail@126.com</p>
+			</div>
+		</div>
+
+<!-- 右边第二个说明性的公告栏 -->
+		<div class="explain">
+			<div class="privatebox">
+			<p>说明</p>
+			<hr>
+			<p class="rightboxcontent">其他功能还在编写，暂时先上这些！</p>
+			</div>
+		</div>
+
+
+
+	</div>
+</div>
+
+<!-- 这里是底部版权部分包括水平线也在里边 -->
+<div class="foot">
+	<hr class="footerhr">
+
+	<div class="footcontent">
+			<a href="#">关于我们</a>
+			<span>|</span>
+			<a href="#">联系我们</a>
+			<span>|</span>
+			<a href="#">友情链接</a>
+			<p>这里放版权信息暂时先空着</p>
+		<p>电话：********    京ICP备********号</p>
+	</div>
+
+</div>
+
+
+
+
+
+
+</div>
+</body>
+</html>

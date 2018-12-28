@@ -1,0 +1,37 @@
+{%extends 'base.html'%}
+{%block content1%}
+<!--第一层-->
+<div class="picvideo">
+			<ul class="ulm">
+				<li><img src="/statics/images/ti01.png"></li>
+				<li><img src="/statics/images/ti02.png"></li>
+				<li><img src="/statics/images/ti03.png"></li>
+				<li><img src="/statics/images/ti04.png"></li>
+			</ul>
+			<div class="leftclick"><img src="/statics/images/left.png"></div>
+			<div class="rightclick"><img src="/statics/images/right.png"></div>
+			<ul class="point"></ul>
+		</div>
+
+		<div class="introduce">待定区域</div>
+
+<!--正文部分-->
+
+		<div class="arttitle"><div class="newart">最新分享</div></div>
+		<!-- 后台填数据需要重复的部分 -->
+
+	<div class="artbox">
+		{%for data in artDataList%}
+		<hr>
+        <a href="{%url 'htmlPageApp:details' data.id%}">
+		<div class="art">
+            <div class="artpic"><img src="/statics/media/{{data.artPic}}"></div><div class="artcontent"><h3>{{data.artTitle}}</h3>
+        <h5>{{data.artFTitle}}</h5></div>
+		</div>
+        </a>
+        {%endfor%}
+
+		<!-- 这个hr是最后一个起美观作用的不包含在每一个文章元素内 -->
+		<hr>
+	</div>
+{%endblock content1%}

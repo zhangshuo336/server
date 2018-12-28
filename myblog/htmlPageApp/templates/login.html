@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>七月-登录</title>
+	<link rel="stylesheet" type="text/css" href="/statics/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/statics/css/login.css">
+	<link rel="shortcut icon" href="/statics/images/favicon.ico" />
+    <script src="/statics/js/jquery-1.12.4.min.js"></script>
+	<script src="/statics/js/login.js"></script>
+    <script>
+        $(function(){
+        if({{pwderror}}==1)
+        {$('.pwd_error').html('密码错误').show();}
+		else{$('.pwd_error').hide();}
+		if({{unameerror}}==1)
+        {$('.user_error').html('用户名不存在').show();}
+		else{$('.user_error').hide();}
+		})
+    </script>
+
+</head>
+<body>
+	<div class="body">
+
+
+		<div class="login_form fr">
+				<div class="login_title clearfix">
+					<h1>七月-登录</h1>
+					<a href="{%url 'htmlPageApp:registers'%}">立即注册</a>
+				</div>
+				<div class="form_input">
+					<form id="login_form" method="post" action="{%url 'htmlPageApp:checkPassword'%}">
+                        {%csrf_token%}
+						<input value="{{uname}}" type="text" name="username" class="name_input" placeholder="请输入用户名">
+						<div class="user_error">输入错误</div>
+						<input value="{{passwd}}" type="password" name="pwd" class="pass_input" placeholder="请输入密码">
+						<div class="pwd_error">输入错误</div>
+                        <input type="text" class="cat_input" placeholder="输入验证码"><div class="cat_but"><img src="/loginVerify/?1" alt="验证码"></div>
+						<div class="cat_error">输入错误</div>
+						<div class="more_input clearfix">
+							<input type="checkbox" name="flag" value="1" checked>
+							<label>记住用户名</label>
+							<a href="#">忘记密码</a>
+						</div>
+						<input type="submit" name="" value="登录" class="input_submit">
+					</form>
+				</div>
+			</div>
+
+
+			
+	</div>
+	
+</body>
+</html>

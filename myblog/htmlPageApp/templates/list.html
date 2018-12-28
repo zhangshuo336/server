@@ -1,0 +1,43 @@
+{%extends 'base.html'%}
+{%block content1%}
+<div class="arttitle"><div class="newart">{{pageName}}</div></div>
+		<!-- 后台填数据需要重复的部分 -->
+
+	<div class="artbox">
+		{%for data in page%}
+		<hr>
+		<a href="{%url 'htmlPageApp:details' data.id%}">
+		<div class="art">
+			<div class="artpic"><img src="/statics/media/{{data.artPic}}"></div><div class="artcontent">
+			<h3>{{data.artTitle}}</h3>
+        <h5>{{data.artFTitle}}</h5>
+		</div>
+		</div>
+		</a>
+		{%endfor%}
+
+		<!-- 这个hr是最后一个起美观作用的不包含在每一个文章元素内 -->
+		<hr>
+	</div>
+<div class="pageNum">
+			<div class="pagenation">
+				{%if page.has_previous%}
+				<a href="{%url 'htmlPageApp:listPage' page.previous_page_number sortnum%}"><上一页</a>
+				{%else%}
+				<a href=""><上一页</a>
+				{%endif%}
+				{%for i in page.paginator.page_range%}
+				{%if i == page.number%}
+				<a href="#" class="active">{{i}}</a>
+				{%else%}
+				<a href="{%url 'htmlPageApp:listPage' i sortnum%}">{{i}}</a>
+				{%endif%}
+				{%endfor%}
+				{%if page.has_next%}
+				<a href="{%url 'htmlPageApp:listPage' page.next_page_number sortnum%}"><下一页</a>
+				{%else%}
+				<a href=""><下一页</a>
+				{%endif%}
+			</div>
+</div>
+{%endblock content1%}

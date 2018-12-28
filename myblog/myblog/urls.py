@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^',include('htmlPageApp.urls',namespace='htmlPageApp')),
     url(r'^tinymce/',include('tinymce.urls')),
+    url(r'^search/', include('haystack.urls')),
 ]

@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'tinymce',
     'picApp',
     'tonApp',
+    'haystack',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -61,7 +62,7 @@ ROOT_URLCONF = 'myblog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'htmlPageApp/templates/'),],
+        'DIRS': [os.path.join(BASE_DIR,'htmlPageApp/templates'),os.path.join(BASE_DIR,'artDataApp/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -97,6 +98,13 @@ TINYMCE_DEFAULT_CONFIG = {
     'height': 400,
 }
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
+}
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 

@@ -29,7 +29,6 @@ def loginTest(func):
 
 
 # 返回前端首页并传递最新年的5条数据
-@cache_page(60*5)
 def index(request):
     artDataList = ArtData.objects.order_by('-id')[0:5]
     content = {'artDataList':artDataList,'pageTitle':'七月-首页'}
@@ -59,7 +58,6 @@ def details(request,idnum):
     return render(request,'detail.html',content)
 
 # 返回注册页
-@cache_page(60*5)
 def registers(request):
     return render(request,'register.html')
 
@@ -67,7 +65,6 @@ def registers(request):
 
 
 # 返回登陆页
-@cache_page(60*5)
 def logins(request):
     return render(request,'login.html')
 

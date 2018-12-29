@@ -3,11 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{{pageTitle}}</title>
+	{%load cache%}
+	{%cache 61200 hello%}
 	<link rel="stylesheet" type="text/css" href="/statics/css/index.css">
 	<link rel="stylesheet" type="text/css" href="/statics/css/reset.css">
 	<link rel="shortcut icon" href="/statics/images/favicon.ico" />
 	<script type="text/javascript" src="/statics/js/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript" src="/statics/js/index.js"></script>
+	{%endcache%}
 </head>
 <body>
 <div class="body">
@@ -109,6 +112,8 @@
 </div>
 
 <!-- 这里是底部版权部分包括水平线也在里边 -->
+	{%load cache%}
+	{%cache 6000 hello2%}
 <div class="foot">
 	<hr class="footerhr">
 
@@ -123,8 +128,7 @@
 	</div>
 
 </div>
-
-
+	{%endcache%}
 
 
 

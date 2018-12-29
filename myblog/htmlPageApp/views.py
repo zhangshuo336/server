@@ -9,7 +9,11 @@ from django.http import HttpResponseRedirect,HttpResponse,JsonResponse
 from django.core.urlresolvers import reverse
 from blogUserApp.models import User
 from hashlib import sha1
-from task import *
+import smtplib
+from email.mime.text import MIMEText
+from email.utils import formataddr
+import time
+import random
 from django.views.decorators.cache import cache_page
 
 # 装饰器用于对用户登陆状态的检测
@@ -55,7 +59,7 @@ def details(request,idnum):
     return render(request,'detail.html',content)
 
 # 返回注册页
-@cache_page(60*60)
+@cache_page(60*5)
 def registers(request):
     return render(request,'register.html')
 
@@ -63,7 +67,7 @@ def registers(request):
 
 
 # 返回登陆页
-@cache_page(60*60)
+@cache_page(60*5)
 def logins(request):
     return render(request,'login.html')
 

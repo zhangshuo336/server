@@ -1,6 +1,20 @@
 {%extends 'base.html'%}
 {%block head1%}
 <link rel="stylesheet" href="/statics/css/detail.css">
+<script>
+$(function(){
+    $('#fa-heart').click(function(){
+    $.get('/ton/Good','tipid='+{{data.id}},function(data){
+    if(data==1){
+    num = $("#goodtip").text();
+    num = parseInt(num)+1;
+    $("#goodtip").html(num);
+    }
+    else{alert("你已经点过赞了!");}
+    });
+    });
+    })
+</script>
 {%endblock head1%}
 {%block content1%}
 {%if data.artDivide == 0%}
@@ -21,7 +35,7 @@
 		</div>
         <!--==================文章人气msg==================-->
         <div class="artdetail">
-            <div class="artmsg">&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true">&nbsp;{{data.createTime}}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-eye" aria-hidden="true">&nbsp;{{data.lookTip}}</i>&nbsp;&nbsp;&nbsp;<i class="fa fa-heart" aria-hidden="true">&nbsp;{{data.goodTip}}</i>&nbsp;&nbsp;&nbsp;<i class="fa fa-commenting-o" aria-hidden="true">&nbsp;{{data.sayTip}}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-tag" aria-hidden="true">{%if data.artDivide == 0%}&nbsp;技术分享{%else%}&nbsp;读书笔记{%endif%}</i></div>
+            <div class="artmsg">&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true">&nbsp;{{data.createTime}}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-eye" aria-hidden="true">&nbsp;{{data.lookTip}}</i>&nbsp;&nbsp;&nbsp;<i class="fa fa-heart" aria-hidden="true" id="fa-heart">&nbsp;<span id="goodtip">{{data.goodTip}}</span></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-commenting-o" aria-hidden="true">&nbsp;{{data.sayTip}}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-tag" aria-hidden="true">{%if data.artDivide == 0%}&nbsp;技术分享{%else%}&nbsp;读书笔记{%endif%}</i></div>
         </div>
         <!--=================================================-->
 		<!--=================评论框================-->

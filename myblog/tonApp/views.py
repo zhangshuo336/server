@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from htmlPageApp.views import loginTest
 from artDataApp.models import ArtData
+from blogUserApp.models import UserGood
+from django.http import HttpResponse
 
 # Create your views here.
 @loginTest
@@ -26,5 +28,26 @@ def recvTon(request):
     ton.tonArea = request.POST.get('userTon','')
     ton.tonGoodTip = 0
     ton.save()
-    print userurl
     return HttpResponseRedirect(userurl)
+
+@loginTest
+def goods(request):
+    ids = request.GET.get('tipid')
+    userid = request.session.get("userid",'')
+    datalist = UserGood.objects.filter(art_id=int(ids)).all()
+    print userid
+    print datalist
+    for data in datalist:
+        if int(data.user_id) == int(userid):
+            return HttpResponse(0)
+    newmsg = UserGood()
+    newmsg.user_id = int(userid)
+    newmsg.art_id = int(ids)
+    newmsg.save()
+    g = ArtData.objects.get(id=int(ids))
+    num = g.goodTip
+    num+=1
+    g.goodTip = num
+    g.save()
+    return HttpResponse(1)
+

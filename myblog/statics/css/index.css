@@ -283,7 +283,7 @@ color: black;
 }
 .art:hover{
 	background-color: #ABD946;
-	cursor: pointer;
+
 }
 .art:hover .artcontent{
 	color:#fff;
@@ -291,6 +291,7 @@ color: black;
 .artdetail{
 	font-size: 15px;
 	width: 650px;
+	margin-top:5px;
 }
 .explain{
 	margin-top: 20px; 
@@ -313,7 +314,6 @@ a{text-decoration:none;color:#fff;margin:0;padding:0;}
 .artdetails{
 width:450px;
 height:70px;
-background-color:red;
 font-size:15px;
 overflow:hidden;
 }
@@ -321,11 +321,10 @@ overflow:hidden;
 .artmsg{
 width:450px;
 height:25px;
-background-color:green;
 font-size:15px;
 float:right;
 line-height:25px;
-color:#FFF;
+color:#E01EA9;
 }
 
 .artdetailss{
@@ -335,5 +334,6 @@ color:green;
 float:left;
 font-size:15px;
 line-height:15px;
+cursor: pointer;
 }
 

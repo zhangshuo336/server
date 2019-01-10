@@ -1,0 +1,55 @@
+.tonfont{
+			color: #1E55E0;
+			font-weight: bold;
+			font-size: 15px;
+		}
+		.contentarea{
+			outline: none;
+			border: 1px #1E55E0 solid;
+		}
+		ul{
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		li{
+			padding: 0;
+			margin: 0;
+		}
+		input{
+			outline: none;
+			border: none;
+		}
+		.areasub{
+			width: 100px;
+			height: 30px;
+			background-color: #1E55E0;
+			color: #FFF;
+			font-weight: bold;
+			font-size: 15px;
+			margin-left: 539px;
+		}
+		.photosize{
+			width: 30px;
+			height: 30px;
+			border-radius: 15px;
+			overflow: hidden;
+		}
+		.userphoto{
+			display: inline-block;
+		}
+
+		.usermsg{
+			display: inline-block;
+			font-size:20px;
+			color:#1E55E0;
+		}
+		.tip{
+		color:red;
+		margin-left:600px;
+		}
+		.nonemsg{
+		font-size:50px;
+		font-weight:bold;
+		color:#1E55E0;
+		}

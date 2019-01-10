@@ -13,3 +13,5 @@ class User(models.Model):
     isDelete = models.BooleanField(default=False)
     createTime = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.loveName.encode('utf-8')

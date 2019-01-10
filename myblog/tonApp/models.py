@@ -6,6 +6,6 @@ class Ton(models.Model):
     tonMesage = models.ForeignKey(User)
     tonTreateTime = models.DateTimeField(auto_now_add=True)
     tip = models.ForeignKey(ArtData)
-    tonArea = models.IntegerField()
+    tonArea = models.CharField(max_length=4000)
     tonGoodTip = models.IntegerField()
     tonIsDelete = models.BooleanField(default=False)

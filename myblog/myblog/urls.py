@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^',include('htmlPageApp.urls',namespace='htmlPageApp')),
     url(r'^tinymce/',include('tinymce.urls')),
     url(r'^search/', include('haystack.urls')),
+    url(r'^ton/',include("tonApp.urls",namespace="tonApp")),
 ]

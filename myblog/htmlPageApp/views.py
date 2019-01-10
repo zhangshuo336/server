@@ -1,5 +1,5 @@
 #coding=utf-8
-from django.shortcuts import render
+from django.shortcuts import render,render_to_response
 from artDataApp.models import ArtData
 from django.core.paginator import Paginator
 from createCode.myCreate import picChecker
@@ -14,6 +14,8 @@ from email.mime.text import MIMEText
 from email.utils import formataddr
 import time
 import random
+from tonApp.models import Ton
+from django.template import RequestContext
 from django.views.decorators.cache import cache_page
 
 # 装饰器用于对用户登陆状态的检测
@@ -54,8 +56,16 @@ def listPage(request,pagenum,sortnum):
 @loginTest
 def details(request,idnum):
     data = ArtData.objects.get(pk=int(idnum))
-    content = {'data':data}
-    return render(request,'detail.html',content)
+    num = data.lookTip
+    num+=1
+    data.lookTip = num
+    data.save()
+    tonlist = Ton.objects.filter(tip_id=int(idnum))
+    url = request.get_full_path()
+    content = {'data':data,'tonlist':tonlist}
+    resp = render_to_response('detail.html',content,context_instance=RequestContext(request))
+    resp.set_cookie('detailurl',url)
+    return resp
 
 # 返回注册页
 def registers(request):

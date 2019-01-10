@@ -1,4 +1,7 @@
 {%extends 'base.html'%}
+{%block head1%}
+<link rel="stylesheet" href="/statics/css/detail.css">
+{%endblock head1%}
 {%block content1%}
 {%if data.artDivide == 0%}
 <div class="arttitle"><div class="newart">技术分享</div></div>
@@ -16,6 +19,44 @@
 
 			<!-- 这里填详情数据 -->
 		</div>
+        <!--==================文章人气msg==================-->
+        <div class="artdetail">
+            <div class="artmsg">&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true">&nbsp;{{data.createTime}}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-eye" aria-hidden="true">&nbsp;{{data.lookTip}}</i>&nbsp;&nbsp;&nbsp;<i class="fa fa-heart" aria-hidden="true">&nbsp;{{data.goodTip}}</i>&nbsp;&nbsp;&nbsp;<i class="fa fa-commenting-o" aria-hidden="true">&nbsp;{{data.sayTip}}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-tag" aria-hidden="true">{%if data.artDivide == 0%}&nbsp;技术分享{%else%}&nbsp;读书笔记{%endif%}</i></div>
+        </div>
+        <!--=================================================-->
+		<!--=================评论框================-->
+		<hr>
+		<div class="artdetail">
+			<form action="{%url 'tonApp:recvton'%}" method="post">
+				{%csrf_token%}
+				<ul>
+				<li><input type="text" value="{{data.id}}" name="arttip" style="display:none;"></li>
+				<li class="tonfont">评论一下</li>
+				<li><textarea name="userTon" id="" cols="79" rows="6" class="contentarea"></textarea></li>
+				<li><input type="submit" value="发&nbsp;&nbsp;&nbsp;表" class="areasub"></li>
+				</ul>
+			</form>
+		</div>
+		<!--=======================================-->
+		<!--====================评论区展示================-->
+		{%if tonlist%}
+		{%for data in tonlist%}
+		<div class="artdetail">
+			<hr>
+				<ul style="margin-top:5px">
+				<li><div class="userphoto"><img src="/statics/usermedia/cecdac93002c70e8dad5190532a4df0a.jpg" class="photosize"></div><div class="usermsg "><span>{{data.tonMesage}}&nbsp;&nbsp;&nbsp;&nbsp;</span><span>{{data.tonTreateTime}}</span></div></li>
+				<li><div>{{data.tonArea}}</div></li>
+				<li class="tip"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>{{data.tonGoodTip}}</li>
+				</ul>
+			</div>
+		{%endfor%}
+		{%else%}
+		<div class="artdetail">
+			<hr>
+			<div class="nonemsg">暂时没有评论!</div>
+		</div>
+		{%endif%}
+		<!--====================================================-->
 		<!-- 这个hr是最后一个起美观作用的不包含在每一个文章元素内 -->
 		<hr>
 	</div>

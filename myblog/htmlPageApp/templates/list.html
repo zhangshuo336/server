@@ -8,10 +8,17 @@
 		<hr>
 		<a href="{%url 'htmlPageApp:details' data.id%}">
 		<div class="art">
-			<div class="artpic"><img src="/statics/media/{{data.artPic}}"></div><div class="artcontent">
+			<div class="artpic"><img src="/statics/media/{{data.artPic}}"></div>
+			<div class="artcontent">
 			<h3>{{data.artTitle}}</h3>
         <h5>{{data.artFTitle}}</h5>
+			<div class="artdetails">{{data.art|safe}}</div>
+			<div class="artdetailss">[详情]</div>
+
 		</div>
+			<div class="artmsg">&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true">&nbsp;{{data.createTime}}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-eye" aria-hidden="true">&nbsp;{{data.lookTip}}</i>&nbsp;&nbsp;&nbsp;<i class="fa fa-heart" aria-hidden="true">&nbsp;{{data.goodTip}}</i>&nbsp;&nbsp;&nbsp;<i class="fa fa-commenting-o" aria-hidden="true">&nbsp;{{data.sayTip}}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-tag" aria-hidden="true">{%if data.artDivide == 0%}&nbsp;技术分享{%else%}&nbsp;读书笔记{%endif%}</i></div>
+
+
 		</div>
 		</a>
 		{%endfor%}

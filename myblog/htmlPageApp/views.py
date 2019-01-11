@@ -16,6 +16,7 @@ import time
 import random
 from tonApp.models import Ton
 from django.template import RequestContext
+import re
 from django.views.decorators.cache import cache_page
 
 # 装饰器用于对用户登陆状态的检测
@@ -150,24 +151,51 @@ def checkMailCode(request):
 
 # 用户注册逻辑
 def userRegister(request):
-    userName = request.POST['user_name']
-    password = request.POST['pwd']
-    userEmail = request.POST['email']
+    userName = request.POST.get('user_name','')
+    password = request.POST.get('pwd','')
+    password2 = request.POST.get('cpwd','')
+    userEmail = request.POST.get('email','')
     # 这里需要对用户穿进来的数据进行二次正则验证
-    s1 = sha1()
-    s1.update(password)
-    sha1_password = s1.hexdigest()
-    u = User()
-    u.userName = userName
-    u.loveName = userName
-    u.password = sha1_password
-    u.email = userEmail
-    u.userPic = 'a'
-    u.save()
-    del request.session['mailCode']
-    del request.session['verify']
-    del request.session['timeOut']
-    return HttpResponseRedirect(reverse('htmlPageApp:logins'))
+    userName_error = False
+    password_error = False
+    userEmail_error = False
+    l = len(userName)
+    if (l>4) and (l<21):
+        pass
+    else:
+        userName_error = True
+    if password == password2:
+        pl = len(password)
+        if pl>7 and pl<21:
+            pass
+        else:
+            password_error = True
+    else:
+        password_error = True
+    if re.match(r'^[a-z0-9][\w\.\-]*@[a-z0-9\-]+(\.[a-z]{2,5}){1,2}$',userEmail):
+        pass
+    else:
+        userName_error = True
+    if userName_error or password_error or userEmail_error:
+        return HttpResponse('建议您使用能够前端注册避免不必要的错误!')
+    else:
+        s1 = sha1()
+        s1.update(password)
+        sha1_password = s1.hexdigest()
+        u = User()
+        u.userName = userName
+        u.loveName = userName
+        u.password = sha1_password
+        u.email = userEmail
+        u.userPic = 'a'
+        u.save()
+        l = User.objects.get(userName=userName)
+        request.session['userid'] = l.id
+        request.session['uname'] = userName
+        del request.session['mailCode']
+        del request.session['verify']
+        del request.session['timeOut']
+        return HttpResponseRedirect(reverse('htmlPageApp:index'))
 
 
 # 核对用户名是否存在

@@ -13,6 +13,21 @@ $(function(){
     else{alert("你已经点过赞了!");}
     });
     });
+
+
+    $('.fa-thumbs-o-up').click(function(){
+    $.get('/ton/tonGoodTip','tonid='+$(this).attr("id"),function(data){
+    if(data){
+    $id = "#"+data;
+    num = $($id).text();
+    alert(num);
+    num = parseInt(num)+1;
+    $($id).html(num);
+    }
+    else{alert("你已经点过赞了!");}
+    });
+    });
+
     })
 </script>
 {%endblock head1%}
@@ -60,7 +75,7 @@ $(function(){
 				<ul style="margin-top:5px">
 				<li><div class="userphoto"><img src="/statics/usermedia/cecdac93002c70e8dad5190532a4df0a.jpg" class="photosize"></div><div class="usermsg "><span>{{data.tonMesage}}&nbsp;&nbsp;&nbsp;&nbsp;</span><span>{{data.tonTreateTime}}</span></div></li>
 				<li><div>{{data.tonArea}}</div></li>
-				<li class="tip"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>{{data.tonGoodTip}}</li>
+				<li class="tip"><i class="fa fa-thumbs-o-up" aria-hidden="true" id="{{data.id}}">{{data.tonGoodTip}}</i></li>
 				</ul>
 			</div>
 		{%endfor%}

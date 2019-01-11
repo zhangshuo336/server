@@ -9,3 +9,8 @@ class Ton(models.Model):
     tonArea = models.CharField(max_length=4000)
     tonGoodTip = models.IntegerField()
     tonIsDelete = models.BooleanField(default=False)
+
+
+class User_ton(models.Model):
+    user = models.ForeignKey(User)
+    ton = models.ForeignKey(Ton)

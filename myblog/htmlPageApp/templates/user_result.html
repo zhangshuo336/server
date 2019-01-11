@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{%block head1%}
+<link rel="stylesheet" href="/statics/css/user_result.css">
+{%endblock head1%}
+{%block content1%}
+<div class="artdetail">
+<div class="error_msg">
+    <dl>
+        <dt>关于昵称</dt>
+        <dd>{{nick_error}}</dd>
+        <dt>关于性别</dt>
+        <dd>{{gender_error}}</dd>
+        <dt>关于年龄</dt>
+        <dd>{{age_error}}</dd>
+    </dl>
+</div>
+    <div class="nav_msg">
+        <a href="{%url 'htmlPageApp:index'%}"><div class="ur_f ur_i">返回首页</div></a><a href="{%url 'htmlPageApp:listPage' 1 0%}"><div class="ur_f ur_p">技术分享页</div></a><a href="{%url 'htmlPageApp:user_center'%}"><div class="ur_f ur_c">修改信息</div></a><a href="{%url 'htmlPageApp:backUp'%}"><div class="ur_f ur_b">退出登陆</div></a>
+    </div>
+</div>
+{%endblock content1%}

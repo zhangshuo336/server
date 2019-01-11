@@ -6,14 +6,21 @@
 	<div class="artbox">
 		{%for data in page.object_list%}
 		<hr>
-		<a href="{%url 'htmlPageApp:details' data.object.id%}">
+
 		<div class="art">
-			<div class="artpic"><img src="/statics/media/{{data.object.artPic}}"></div><div class="artcontent">
+			<div class="artpic"><img src="/statics/media/{{data.object.artPic}}"></div>
+			<div class="artcontent">
 			<h3>{{data.object.artTitle}}</h3>
         <h5>{{data.object.artFTitle}}</h5>
+			<div class="artdetails">{{data.object.art|safe}}</div>
+			<a href="{%url 'htmlPageApp:details' data.object.id%}"><div class="artdetailss">[详情]</div></a>
+
 		</div>
+			<div class="artmsg">&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true">&nbsp;{{data.object.createTime}}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-eye" aria-hidden="true">&nbsp;{{data.object.lookTip}}</i>&nbsp;&nbsp;&nbsp;<i class="fa fa-heart" aria-hidden="true">&nbsp;{{data.object.goodTip}}</i>&nbsp;&nbsp;&nbsp;<i class="fa fa-commenting-o" aria-hidden="true">&nbsp;{{data.object.sayTip}}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-tag" aria-hidden="true">{%if data.object.artDivide == 0%}&nbsp;技术分享{%else%}&nbsp;读书笔记{%endif%}</i></div>
+
+
 		</div>
-		</a>
+
         {% empty %}
         <a>
 		<div class="art">

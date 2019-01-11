@@ -17,6 +17,7 @@ urlpatterns=[
     url(r'backUp',views.backUp,name='backUp'),
     url(r'^loginVerify/$', views.loginVerify, name='loginVerify'),
     url(r'^loginVerifyTest/$', views.loginVerifyTest, name='loginVerifyTest'),
+    url(r'^user_center',views.user_center,name="user_center"),
 
 
 ]

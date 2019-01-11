@@ -234,3 +234,9 @@ def loginVerifyTest(request):
         return HttpResponse(1)
     else:
         return HttpResponse(0)
+@loginTest
+def user_center(request):
+    id = request.session.get('userid')
+    user = User.objects.get(id=id)
+    content = {'user':user}
+    return render(request,"user_center.html",content)

@@ -1,0 +1,45 @@
+.error_msg{
+    width:500px;
+    margin:50px auto;
+    border: 1px solid #1E55E0;
+}
+
+.error_msg dt{
+    color:#1E55E0;
+    font-size:15px;
+    font-weight:bold;
+    margin:10px 0 0 20px;
+}
+
+.ur_f{
+width:125px;
+height:40px;
+font-size:15px;
+line-height:40px;
+font-weight:bold;
+color:#FFF;
+display:inline-block;
+text-align:center;
+border-radius:10px;
+}
+.ur_i{
+background-color:#1E55E0;
+}
+
+.ur_p{
+background-color:#0c8918;
+}
+
+.ur_c{
+background-color:#ff7500;
+}
+
+.ur_b{
+background-color:#ff2121;
+}
+
+.nav_msg{
+    width:500px;
+    margin:50px auto;
+    border: 1px solid #FFF;
+}

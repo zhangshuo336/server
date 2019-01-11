@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^tinymce/',include('tinymce.urls')),
     url(r'^search/', include('haystack.urls')),
     url(r'^ton/',include("tonApp.urls",namespace="tonApp")),
+    url(r'^user/',include("blogUserApp.urls",namespace="user")),
 ]

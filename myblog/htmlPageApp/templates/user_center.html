@@ -1,0 +1,58 @@
+{%extends 'base.html'%}
+{%block head1%}
+<link rel="stylesheet" href="/statics/css/user_center.css">
+<script type="text/javascript" src="/statics/js/user_center.js"></script>
+
+<script>
+    $(function(){
+
+
+
+    <!--触发选择文件的事件-->
+        $('.headpic').click(function(){
+            $('#userpic').trigger('click');
+        });
+
+        <!--触发submit的事件-->
+        var inputBox = document.getElementById("userpic");
+        var img = document.getElementById("img");
+        inputBox.addEventListener("change",function(){
+        var reader = new FileReader();
+        reader.readAsDataURL(inputBox.files[0]);//发起异步请求
+        reader.onload = function(){
+            //读取完成后，将结果赋值给img的src
+            img.src = this.result
+  }
+});
+
+
+
+    })
+</script>
+{%endblock head1%}
+{%block content1%}
+<div class="artdetail">
+    <div id="mycontent">
+        <div class="headpic">{%if user.userPic == 'a'%}<img src="/statics/usermedia/siteinit.jpg" alt="头像" id="img">{%else%}<img src="{{user.userPic}}" alt="头像" id="img">{%endif%}</div>
+        <div class="picre">头像建议大小100*100像素</div>
+        <div class="regbox">
+            <form action="{%url 'user:rescUserMsg'%}" method="post" enctype="multipart/form-data" id="usermsg">
+                {%csrf_token%}
+                <ul>
+                    <li style="display:none;"><div><input type="file" id="userpic" name="userpic"></div></li>
+                    <li><div><label class="labelcss">昵称:</label><input type="text" class="inputcss" id="nickname" name="nickname"></div></li>
+                    <li><div class="error_tip" id="nick_error">提示信息</div></li>
+                    <li><div><label class="labelcss">性别:</label><select name="sex" id="sex" class="inputcss"><option value="1" class="meil">男</option><option value="0" class="fameil">女</option></select></div></li>
+                    <li><div class="error_tip">提示信息</div></li>
+                    <li><div><label class="labelcss">年龄:</label><input type="text" class="inputcss" id="age" name="age"></div></li>
+                    <li><div class="error_tip" id="age_error">提示信息</div></li>
+                    <li><div><input type="submit" value="提  交" class="subbut"></div></li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{%endblock content1%}

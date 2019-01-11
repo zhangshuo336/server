@@ -1,0 +1,42 @@
+ul{list-style: none;}
+a{text-decoration: none;}
+h1{margin:0; padding: 0;}
+.reg{
+	width: 400px;
+	height: 610px;
+	border: 0px solid #C0C1B3;
+	margin :30px auto;
+}
+
+
+.regbox{width:360px;margin:30px auto;}
+.regbox li{height:40px;}
+.inputcss{width:288px;height:38px;border:1px solid #e0e0e0;float:left;outline:none;text-indent:10px;background-color:#f8f8f8}
+.labelcss{width:70px;height:40px;line-height:40px;float:left;font-size:15px;color:black;font-weight:bold}
+.subbut{width:360px;height:40px;background-color:#1E55E0;font-size:18px;color:#fff;font-family:'Microsoft Yahei';cursor:pointer;}
+.error_tip{float:left;height:30px;line-height:30px;margin-left:70px;color:#e62e2e;display:none;}
+
+.headpic{
+width:100px;
+height:100px;
+border-radius:50px;
+margin:20px auto;
+overflow:hidden;
+}
+.picre{
+width:173px;
+font-size:15px;
+font-weight:bold;
+color:blue;
+margin:10px auto;
+}
+.meil{
+color:blue;
+}
+.fameil{
+color:green;
+}
+.inmar{
+margin:30px auto;
+}
+

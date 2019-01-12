@@ -4,4 +4,5 @@ import views
 
 urlpatterns=[
     url(r'^rescUserMsg/$',views.recvUserMsgs,name='rescUserMsg'),
+    url(r'^pwd_reset/$',views.pwd_reset,name="pwd_reset"),
 ]

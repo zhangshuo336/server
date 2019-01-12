@@ -4,6 +4,8 @@ import os
 from myblog import settings
 # Create your views here.
 from models import User
+from django.http import HttpResponse,HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 def recvUserMsgs(request):
     nick_error = 0
@@ -52,7 +54,41 @@ def recvUserMsgs(request):
         return render(request,'user_result.html',error)
 
 
-def hah(request):
-    return render(request,'user_result.html')
+def pwd_reset(request):
+    return render(request,'pwd_reset.html')
+
+def recv_reset_pwd(request):
+    userName = request.POST.get('user_name', '')
+    password = request.POST.get('pwd', '')
+    password2 = request.POST.get('cpwd', '')
+    # 这里需要对用户穿进来的数据进行二次正则验证
+    userName_error = False
+    password_error = False
+    l = len(userName)
+    if (l > 4) and (l < 21):
+        pass
+    else:
+        userName_error = True
+    if password == password2:
+        pl = len(password)
+        if pl > 7 and pl < 21:
+            pass
+        else:
+            password_error = True
+    else:
+        password_error = True
+    if userName_error or password_error:
+        return HttpResponse('建议您使用能够前端注册避免不必要的错误!')
+    else:
+        num = User.objects.get(userName=userName).count()
+        if num == 1:
+            u = User.objects.get(userName)
+            u.password = password
+            u.save()
+            request.session.flush()
+            return HttpResponseRedirect(reverse('htmlPageApp:index'))
+        else:
+            return HttpResponse('建议您使用能够前端注册避免不必要的错误!')
+
 
 

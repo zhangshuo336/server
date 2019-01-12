@@ -1,0 +1,53 @@
+{%extends 'base.html'%}
+{%block head1%}
+<link rel="stylesheet" href="/statics/css/pwd_reset.css">
+<script src=" /statics/js/pwd_reset.js"></script>
+{%endblock head1%}
+{%block content1%}
+<div class="artdetail">
+	<div class="regbox reset_font">
+		密码重置
+	</div>
+    <div class="regbox">
+        <form id="reg_form" method="post" action="/user/user_password_reset">
+					{% csrf_token %}
+				<ul>
+					<li>
+						<label>用户名:</label>
+						<input placeholder="请输入用户名" autocomplete="off" type="text" name="user_name" id="user_name">
+						<span class="error_tip">提示信息</span>
+					</li>
+
+					<li>
+						<label>密码:</label>
+						<input placeholder="请输入密码" type="password" name="pwd" id="pwd">
+						<span class="error_tip">提示信息</span>
+					</li>
+
+					<li>
+						<label>确认密码:</label>
+						<input placeholder="确认密码" type="password" name="cpwd" id="cpwd">
+						<span class="error_tip">提示信息</span>
+					</li>
+
+					<li>
+						<label>验证码:</label>
+						<input placeholder="输入验证码不区分大小写" type="text" autocomplete="off" name="piccatcode" id="piccatcode"><div class="piccatbut"><img src="/loginVerify/?1"></div>
+						<span class="error_tip" id="verify_error">提示信息</span>
+					</li>
+
+					<li>
+						<label>验证码:</label>
+						<input placeholder="输入邮箱验证码" type="text" name="catcode" id="catcode"><div class="catbut">获取验证码</div>
+						<span class="error_tip">提示信息</span>
+					</li>
+
+					<li class="reg_sub">
+						<input type="submit" value="提  交" name="">
+					</li>
+
+				</ul>
+    </div>
+
+</div>
+{%endblock content1%}

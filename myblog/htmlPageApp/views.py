@@ -118,6 +118,39 @@ def mailCode(addr):
     except Exception as e:
         return False
 
+def pwd_reset_send_code(request):
+    uname = request.GET.get('uname',uuid.uuid4())
+    data = User.objects.filter(userName=uname).count()
+    if data == 1:
+        addr = User.objects.get(userName=uname).email
+        for i in range(10):
+            test = mailCode(addr)
+            if test:
+                request.session['pwd_reset_mailcode'] = test
+                request.session['pwd_reset_timeOut'] = time.time()
+                return HttpResponse(1)
+            else:
+                # 最多尝试10次若都失败将通知前端
+                if i < 9:
+                    time.sleep(0.2)
+                else:
+                    return HttpResponse(0)
+    else:
+        return JsonResponse('建议采用前端修改密码保证正顺利进行')
+
+def pwd_reset_checkmailcode(request):
+    userCode = request.GET['mailCode']
+    timeOut = time.time() - request.session.get('pwd_reset_timeOut', 0)
+    # 这里定义验证码的有效期最多位10分钟
+    if timeOut > 600:
+        del request.session['pwd_reset_mailcode']
+        return HttpResponse(0)
+    mailCode = request.session['pwd_reset_mailcode']
+    if userCode == str(mailCode):
+        return HttpResponse(1)
+    else:
+        return HttpResponse(0)
+
 # 采用异步方式发送邮箱验证码缩短用户等待时间
 def sendCode(request):
     addr = request.GET['mailAddr']
@@ -175,7 +208,7 @@ def userRegister(request):
     if re.match(r'^[a-z0-9][\w\.\-]*@[a-z0-9\-]+(\.[a-z]{2,5}){1,2}$',userEmail):
         pass
     else:
-        userName_error = True
+        userEmail_error = True
     if userName_error or password_error or userEmail_error:
         return HttpResponse('建议您使用能够前端注册避免不必要的错误!')
     else:

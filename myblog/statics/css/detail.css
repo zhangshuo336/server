@@ -34,15 +34,20 @@
 			height: 30px;
 			border-radius: 15px;
 			overflow: hidden;
+			vertical-align:bottom;
 		}
 		.userphoto{
 			display: inline-block;
+
 		}
+
 
 		.usermsg{
 			display: inline-block;
 			font-size:20px;
 			color:#1E55E0;
+            margin-left:20px;
+
 		}
 		.tip{
 		color:red;
@@ -52,4 +57,10 @@
 		font-size:50px;
 		font-weight:bold;
 		color:#1E55E0;
+		}
+
+		.user_pic_msg{
+		    height:30px;
+		    line-height:30px;
+		    margin-bottom:10px;
 		}

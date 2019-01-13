@@ -9,7 +9,7 @@
 		密码重置
 	</div>
     <div class="regbox">
-        <form id="reg_form" method="post" action="/user/user_password_reset">
+        <form id="reg_form" method="post" action="/user/recv_reset_pwd/">
 					{% csrf_token %}
 				<ul>
 					<li>
@@ -19,7 +19,7 @@
 					</li>
 
 					<li>
-						<label>密码:</label>
+						<label>新密码:</label>
 						<input placeholder="请输入密码" type="password" name="pwd" id="pwd">
 						<span class="error_tip">提示信息</span>
 					</li>

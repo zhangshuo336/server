@@ -6,6 +6,7 @@ from myblog import settings
 from models import User
 from django.http import HttpResponse,HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from hashlib import sha1
 
 def recvUserMsgs(request):
     nick_error = 0
@@ -80,13 +81,16 @@ def recv_reset_pwd(request):
     if userName_error or password_error:
         return HttpResponse('建议您使用能够前端注册避免不必要的错误!')
     else:
-        num = User.objects.get(userName=userName).count()
+        num = User.objects.filter(userName=userName).count()
         if num == 1:
-            u = User.objects.get(userName)
-            u.password = password
+            s1 = sha1()
+            s1.update(password)
+            sha1_password = s1.hexdigest()
+            u = User.objects.get(userName=userName)
+            u.password = sha1_password
             u.save()
             request.session.flush()
-            return HttpResponseRedirect(reverse('htmlPageApp:index'))
+            return HttpResponseRedirect(reverse('htmlPageApp:logins'))
         else:
             return HttpResponse('建议您使用能够前端注册避免不必要的错误!')
 

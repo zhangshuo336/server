@@ -134,7 +134,7 @@ var timer = setInterval(function(){
 
 function check_catcode(){
         var userCode = $('#catcode').val();
-        if(userCode){
+        if(userCode == ''){
             error_emailcode=true;
             $('.catbut').next().html('验证码不能为空!');
             $('.catbut').next().css('color','red');
@@ -161,15 +161,15 @@ function check_catcode(){
 
 
 
-
+var i = 60;
 $(function(){
 
-var i = 60;
+
 	$('.catbut').click(function(){
-	alert(error_check_password);
-	alert(error_password);
-	alert(error_name);
-	alert(error_catcode);
+//	alert(error_check_password);
+//	alert(error_password);
+//	alert(error_name);
+//	alert(error_catcode);
 	if(error_name == false && error_password == false && error_check_password == false && error_catcode == false){
 	$('.catbut').next().hide();
         countDown();}
@@ -188,6 +188,11 @@ var i = 60;
     $('.piccatbut').click(function(){changeCode();});
     $('#piccatcode').keyup(function(){check_code();});
     $('#reg_form').submit(function(){
+        check_uname();
+        check_code();
+        check_pwd();
+        check_cpwd();
+        check_catcode();
         if(error_check_password == false && error_catcode == false && error_name == false && error_emailcode == false && error_password == false)
         {return true;}
         else{return false;}

@@ -40,7 +40,7 @@
                         <div class="news_category">热 点</div>
                         {%for data in top%}
                         <!--每一条新闻-->
-                        <div class="news_tip">
+                        <a href="{{data.url}}" target="_blank"><div class="news_tip">
                             <!--新闻裂变的内容包括图片 标题 和新闻注释-->
                             <div class="news_content">
                                 <!--新闻图片div-->
@@ -56,7 +56,7 @@
                                 {{data.media}} {{data.create_date}}
                                 </div>
                             </div>
-                        </div>
+                        </div></a>
                         {%endfor%}
                     </div>
 
@@ -65,7 +65,7 @@
                         <div class="news_category">社 会</div>
                         {%for data in shehui%}
                         <!--每一条新闻-->
-                        <div class="news_tip">
+                        <a href="{{data.url}}" target="_blank"><div class="news_tip">
                             <!--新闻裂变的内容包括图片 标题 和新闻注释-->
                             <div class="news_content">
                                 <!--新闻图片div-->
@@ -81,7 +81,7 @@
                                 {{data.media}} {{data.create_date}}
                                 </div>
                             </div>
-                        </div>
+                        </div></a>
                         {%endfor%}
                     </div>
 
@@ -90,7 +90,7 @@
                         <div class="news_category">国 内</div>
                         {%for data in guonei%}
                         <!--每一条新闻-->
-                        <div class="news_tip">
+                        <a href="{{data.url}}" target="_blank"><div class="news_tip">
                             <!--新闻裂变的内容包括图片 标题 和新闻注释-->
                             <div class="news_content">
                                 <!--新闻图片div-->
@@ -106,7 +106,7 @@
                                 {{data.media}} {{data.create_date}}
                                 </div>
                             </div>
-                        </div>
+                        </div></a>
                         {%endfor%}
                     </div>
 
@@ -115,7 +115,7 @@
                         <div class="news_category">国 际</div>
                         {%for data in guoji%}
                         <!--每一条新闻-->
-                        <div class="news_tip">
+                        <a href="{{data.url}}" target="_blank"><div class="news_tip">
                             <!--新闻裂变的内容包括图片 标题 和新闻注释-->
                             <div class="news_content">
                                 <!--新闻图片div-->
@@ -131,7 +131,7 @@
                                 {{data.author}} {{data.create_date}}
                                 </div>
                             </div>
-                        </div>
+                        </div></a>
                         {%endfor%}
                     </div>
 
@@ -188,7 +188,7 @@
                         <div class="news_category">军 事</div>
                         {%for data in junshi%}
                         <!--每一条新闻-->
-                        <div class="news_tip">
+                        <a href="{{data.url}}" target="_blank"><div class="news_tip">
                             <!--新闻裂变的内容包括图片 标题 和新闻注释-->
                             <div class="news_content">
                                 <!--新闻图片div-->
@@ -204,7 +204,7 @@
                                 {{data.media}} {{data.create_date}}
                                 </div>
                             </div>
-                        </div>
+                        </div></a>
                         {%endfor%}
                     </div>
 

@@ -1,0 +1,305 @@
+{%extends 'base.html'%}
+{%block head1%}
+<link rel="stylesheet" href="/statics/css/yellow.css">
+<script src="/statics/js/yellow.js"></script>
+{%endblock head1%}
+{%block content1%}
+<div class="artdetail">
+    <div class="yel_tag clearfix">
+        <ul>
+            <li style="border-left:2px solid #1E55E0;" class="yel_tag_news">新闻热点</li>
+            <li class="yel_tag_num_phone">号码归属地</li>
+            <li class="yel_tag_ip">IP查询</li>
+            <li class="yel_tag_sfcard">身份证查询</li>
+            <li class="yel_tag_caipiao">彩票中奖号码</li>
+            <li class="yel_tag_hcaipiao" style="border-right:2px solid #1E55E0;">往期中奖号码</li>
+        </ul>
+    </div>
+    <div class="yel_con">
+        <div class="news">
+            <div>
+                <div class="news_tag">
+                    <ul>
+                        <li class="news_tag_top">热点</li>
+                        <li class="news_tag_shehui">社会</li>
+                        <li class="news_tag_guonei">国内</li>
+                        <li class="news_tag_guoji">国际</li>
+                        <!--<li>娱乐</li>-->
+                        <!--<li>体育</li>-->
+                        <li class="news_tag_junshi">军事</li>
+                        <!--<li>科技</li>-->
+                        <!--<li>财经</li>-->
+                        <!--<li>时尚</li>-->
+                    </ul>
+                </div>
+                <!--新闻展示区-->
+                <div class="news_con">
+
+                    <!--头条-->
+                    <div class="top">
+                        <div class="news_category">热 点</div>
+                        {%for data in top%}
+                        <!--每一条新闻-->
+                        <div class="news_tip">
+                            <!--新闻裂变的内容包括图片 标题 和新闻注释-->
+                            <div class="news_content">
+                                <!--新闻图片div-->
+                                <!--<div class="news_pic">-->
+                                <!--<img src="{{data.thumbnail_pic_s}}" alt="">-->
+                                <!--</div>-->
+                                <!--新闻标题div-->
+                                <div class="news_word">
+                                {{data.title}}
+                                </div>
+                                <!--新闻信息div-->
+                                <div class="news_msg">
+                                {{data.media}} {{data.create_date}}
+                                </div>
+                            </div>
+                        </div>
+                        {%endfor%}
+                    </div>
+
+                    <!--社会-->
+                    <div class="shehui">
+                        <div class="news_category">社 会</div>
+                        {%for data in shehui%}
+                        <!--每一条新闻-->
+                        <div class="news_tip">
+                            <!--新闻裂变的内容包括图片 标题 和新闻注释-->
+                            <div class="news_content">
+                                <!--新闻图片div-->
+                                <!--<div class="news_pic">-->
+                                <!--<img src="{{data.thumbnail_pic_s}}" alt="">-->
+                                <!--</div>-->
+                                <!--新闻标题div-->
+                                <div class="news_word">
+                                {{data.title}}
+                                </div>
+                                <!--新闻信息div-->
+                                <div class="news_msg">
+                                {{data.media}} {{data.create_date}}
+                                </div>
+                            </div>
+                        </div>
+                        {%endfor%}
+                    </div>
+
+                    <!--国内-->
+                    <div class="guonei">
+                        <div class="news_category">国 内</div>
+                        {%for data in guonei%}
+                        <!--每一条新闻-->
+                        <div class="news_tip">
+                            <!--新闻裂变的内容包括图片 标题 和新闻注释-->
+                            <div class="news_content">
+                                <!--新闻图片div-->
+                                <!--<div class="news_pic">-->
+                                <!--<img src="{{data.thumbnail_pic_s}}" alt="">-->
+                                <!--</div>-->
+                                <!--新闻标题div-->
+                                <div class="news_word">
+                                {{data.title}}
+                                </div>
+                                <!--新闻信息div-->
+                                <div class="news_msg">
+                                {{data.media}} {{data.create_date}}
+                                </div>
+                            </div>
+                        </div>
+                        {%endfor%}
+                    </div>
+
+                    <!--国际-->
+                    <div class="guoji">
+                        <div class="news_category">国 际</div>
+                        {%for data in guoji%}
+                        <!--每一条新闻-->
+                        <div class="news_tip">
+                            <!--新闻裂变的内容包括图片 标题 和新闻注释-->
+                            <div class="news_content">
+                                <!--新闻图片div-->
+                                <!--<div class="news_pic">-->
+                                <!--<img src="{{data.thumbnail_pic_s}}" alt="">-->
+                                <!--</div>-->
+                                <!--新闻标题div-->
+                                <div class="news_word">
+                                {{data.title}}
+                                </div>
+                                <!--新闻信息div-->
+                                <div class="news_msg">
+                                {{data.author}} {{data.create_date}}
+                                </div>
+                            </div>
+                        </div>
+                        {%endfor%}
+                    </div>
+
+                     <!--娱乐-->
+                    <!--<div class="yule">-->
+                        <!--{%for data in yule%}-->
+                        <!--&lt;!&ndash;每一条新闻&ndash;&gt;-->
+                        <!--<div class="news_tip">-->
+                            <!--&lt;!&ndash;新闻裂变的内容包括图片 标题 和新闻注释&ndash;&gt;-->
+                            <!--<div class="news_content">-->
+                                <!--&lt;!&ndash;新闻图片div&ndash;&gt;-->
+                                <!--<div class="news_pic">-->
+                                <!--<img src="{{data.thumbnail_pic_s}}" alt="">-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;新闻标题div&ndash;&gt;-->
+                                <!--<div class="news_word">-->
+                                <!--{{data.title}}-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;新闻信息div&ndash;&gt;-->
+                                <!--<div class="news_msg">-->
+                                <!--{{data.date}} {{data.author_name}}-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--{%endfor%}-->
+                    <!--</div>-->
+
+                     <!--&lt;!&ndash;体育&ndash;&gt;-->
+                    <!--<div class="tiyu">-->
+                        <!--{%for data in tiyu%}-->
+                        <!--&lt;!&ndash;每一条新闻&ndash;&gt;-->
+                        <!--<div class="news_tip">-->
+                            <!--&lt;!&ndash;新闻裂变的内容包括图片 标题 和新闻注释&ndash;&gt;-->
+                            <!--<div class="news_content">-->
+                                <!--&lt;!&ndash;新闻图片div&ndash;&gt;-->
+                                <!--<div class="news_pic">-->
+                                <!--<img src="{{data.thumbnail_pic_s}}" alt="">-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;新闻标题div&ndash;&gt;-->
+                                <!--<div class="news_word">-->
+                                <!--{{data.title}}-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;新闻信息div&ndash;&gt;-->
+                                <!--<div class="news_msg">-->
+                                <!--{{data.date}} {{data.author_name}}-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--{%endfor%}-->
+                    <!--</div>-->
+
+                     <!--军事-->
+                    <div class="junshi">
+                        <div class="news_category">军 事</div>
+                        {%for data in junshi%}
+                        <!--每一条新闻-->
+                        <div class="news_tip">
+                            <!--新闻裂变的内容包括图片 标题 和新闻注释-->
+                            <div class="news_content">
+                                <!--新闻图片div-->
+                                <!--<div class="news_pic">-->
+                                <!--<img src="{{data.thumbnail_pic_s}}" alt="">-->
+                                <!--</div>-->
+                                <!--新闻标题div-->
+                                <div class="news_word">
+                                {{data.title}}
+                                </div>
+                                <!--新闻信息div-->
+                                <div class="news_msg">
+                                {{data.media}} {{data.create_date}}
+                                </div>
+                            </div>
+                        </div>
+                        {%endfor%}
+                    </div>
+
+                     <!--科技-->
+                    <!--<div class="keji">-->
+                        <!--{%for data in keji%}-->
+                        <!--&lt;!&ndash;每一条新闻&ndash;&gt;-->
+                        <!--<div class="news_tip">-->
+                            <!--&lt;!&ndash;新闻裂变的内容包括图片 标题 和新闻注释&ndash;&gt;-->
+                            <!--<div class="news_content">-->
+                                <!--&lt;!&ndash;新闻图片div&ndash;&gt;-->
+                                <!--<div class="news_pic">-->
+                                <!--<img src="{{data.thumbnail_pic_s}}" alt="">-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;新闻标题div&ndash;&gt;-->
+                                <!--<div class="news_word">-->
+                                <!--{{data.title}}-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;新闻信息div&ndash;&gt;-->
+                                <!--<div class="news_msg">-->
+                                <!--{{data.date}} {{data.author_name}}-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--{%endfor%}-->
+                    <!--</div>-->
+
+                     <!--&lt;!&ndash;财经&ndash;&gt;-->
+                    <!--<div class="caijing">-->
+                        <!--{%for data in caijing%}-->
+                        <!--&lt;!&ndash;每一条新闻&ndash;&gt;-->
+                        <!--<div class="news_tip">-->
+                            <!--&lt;!&ndash;新闻裂变的内容包括图片 标题 和新闻注释&ndash;&gt;-->
+                            <!--<div class="news_content">-->
+                                <!--&lt;!&ndash;新闻图片div&ndash;&gt;-->
+                                <!--<div class="news_pic">-->
+                                <!--<img src="{{data.thumbnail_pic_s}}" alt="">-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;新闻标题div&ndash;&gt;-->
+                                <!--<div class="news_word">-->
+                                <!--{{data.title}}-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;新闻信息div&ndash;&gt;-->
+                                <!--<div class="news_msg">-->
+                                <!--{{data.date}} {{data.author_name}}-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--{%endfor%}-->
+                    <!--</div>-->
+
+                     <!--&lt;!&ndash;时尚&ndash;&gt;-->
+                    <!--<div class="shishang">-->
+                        <!--{%for data in shishang%}-->
+                        <!--&lt;!&ndash;每一条新闻&ndash;&gt;-->
+                        <!--<div class="news_tip">-->
+                            <!--&lt;!&ndash;新闻裂变的内容包括图片 标题 和新闻注释&ndash;&gt;-->
+                            <!--<div class="news_content">-->
+                                <!--&lt;!&ndash;新闻图片div&ndash;&gt;-->
+                                <!--<div class="news_pic">-->
+                                <!--<img src="{{data.thumbnail_pic_s}}" alt="">-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;新闻标题div&ndash;&gt;-->
+                                <!--<div class="news_word">-->
+                                <!--{{data.title}}-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;新闻信息div&ndash;&gt;-->
+                                <!--<div class="news_msg">-->
+                                <!--{{data.date}} {{data.author_name}}-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--{%endfor%}-->
+                    <!--</div>-->
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="num_phone">
+            电话号码
+        </div>
+        <div class="ip">
+            ip地址
+        </div>
+        <div class="sfcard">
+            身份证
+        </div>
+        <div class="caipiao">
+            彩票
+        </div>
+        <div class="hcaipiao">
+            历史彩票
+        </div>
+    </div>
+</div>
+{%endblock content1%}

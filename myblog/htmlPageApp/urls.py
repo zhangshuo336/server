@@ -20,6 +20,7 @@ urlpatterns=[
     url(r'^user_center/$',views.user_center,name="user_center"),
     url(r'^pwd_reset_send_code/$',views.pwd_reset_send_code,name='pwd_reset_send_code'),
     url(r'^pwd_reset_checkmailcode',views.pwd_reset_checkmailcode,name='pwd_reset_checkmailcode'),
+    url(r'^yellow_page',views.yellow_page,name='yellow_page'),
 
 
 

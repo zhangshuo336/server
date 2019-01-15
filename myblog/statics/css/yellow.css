@@ -1,0 +1,98 @@
+.yel_tag ul{
+    padding:0;
+    margin:0;
+    list-style:none;
+    font-size:0;
+    width:100%
+
+}
+.yel_tag{
+    float:left;
+    width:100%
+    }
+.yel_tag li{
+    padding:0;
+    margin:0;
+    display:inline-block;
+    width:91px;
+    border-top: 2px solid #1E55E0;
+    border-bottom: 2px solid #1E55E0;
+    background-color:#1E55E0;
+    color:#FFF;
+    font-size:15px;
+    font-weight:bold;
+    padding:12px 8px;
+    text-align:center;
+    cursor:pointer;
+}
+.yel_tag li:first-child{
+    background-color:transparent;
+    color:black;
+}
+
+.yel_con{
+    margin-top:10px;
+    float:left;
+}
+/*关于新闻的样式*/
+.news_tag ul{
+    list-style:none;
+    width:100%
+
+}
+.news_tag li{
+    float:left;
+    margin:6px 11px;
+    border: 2px solid red;
+    border-radius:5px;
+    padding:5px 36px;
+    background-color:red;
+    color:#FFF;
+    font-weight:bold;
+    cursor:pointer;
+}
+.news_tag li:first-child{background-color:transparent;color:red;}
+.news_con{
+    float:right;
+    width:650px;
+    overflow:hidden;
+}
+.news_tip{
+    padding:20px 0;
+    float:left;
+    border-top:1px solid black;
+}
+.news_pic{
+    width:160px;
+    height:120px;
+    border-radius:10px;
+    float:left;
+    overflow:hidden;
+}
+.news_word{
+    height:100px;
+    float:left;
+    padding:20px 20px 0 20px;
+    font-weight:bold;
+    font-size:20px;
+}
+.news_msg{
+    width:432px;
+    height:20px;
+    float:left;
+    padding: 0 0 0 20px;
+    color:red;
+}
+.top{display:block;}
+.shehui{display:none;}
+.guonei{display:none;}
+.guoji{display:none;}
+.junshi{display:none;}
+.news_category{color:red;font-size:20px;font-weight:bold;}
+.news{display:block;}
+.num_phone{display:none;}
+.ip{display:none;}
+.sfcard{display:none;}
+.caipiao{display:none;}
+.hcaipiao{display:none;}
+

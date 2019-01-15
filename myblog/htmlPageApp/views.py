@@ -17,6 +17,9 @@ import random
 from tonApp.models import Ton
 from django.template import RequestContext
 import re
+import json, urllib
+from urllib import urlencode
+from models import visitLog
 from django.views.decorators.cache import cache_page
 
 # 装饰器用于对用户登陆状态的检测
@@ -32,7 +35,45 @@ def loginTest(func):
 
 
 # 返回前端首页并传递最新年的5条数据
+# import json, urllib
+# from urllib import urlencode
+#
+# url = "http://apis.juhe.cn/ip/ip2addr"
+# params = {
+#     "ip": "112.51.53.11",  # 需要查询的IP地址或域名
+#     "key": "您申请的ApiKey",  # 应用APPKEY(应用详细页查询)
+# }
+# params = urlencode(params)
+# f = urllib.urlopen(url, params)
+# content = f.read()
+# res = json.loads(content)
+# if res:
+#     print(res)
+# else:
+#     print("请求异常")
 def index(request):
+    url = "http://apis.juhe.cn/ip/ip2addr"
+    if request.META.has_key('HTTP_X_FORWARDED_FOR'):
+        ip = request.META['HTTP_X_FORWARDED_FOR']
+    else:
+        ip = request.META['REMOTE_ADDR']
+    params = {
+        "ip": ip,  # 需要查询的IP地址或域名
+        "key": "47285fd589de069f554c2717c98bda50",  # 应用APPKEY(应用详细页查询)
+        }
+    params = urlencode(params)
+    f = urllib.urlopen(url, params)
+    content = f.read()
+    res = json.loads(content)
+    res=res['result']
+    if res:
+        u = visitLog()
+        u.ip = ip
+        u.area = res['area']
+        u.compy = res['location']
+        u.save()
+    else:
+        pass
     artDataList = ArtData.objects.order_by('-id')[0:5]
     content = {'artDataList':artDataList,'pageTitle':'七月-首页'}
     return render(request,'index.html',content)
@@ -301,3 +342,78 @@ def user_center(request):
     user = User.objects.get(id=id)
     content = {'user':user}
     return render(request,"user_center.html",content)
+
+def yellow_page(request):
+    # url = "http://apis.juhe.cn/ip/ip2addr"
+    # params = {
+    #     "ip": "112.51.53.11",  # 需要查询的IP地址或域名
+    #     "key": "您申请的ApiKey",  # 应用APPKEY(应用详细页查询)
+    # }
+    # params = urlencode(params)
+    # f = urllib.urlopen(url, params)
+    # content = f.read()
+    # res = json.loads(content)
+    # if res:
+    #     print(res)
+    # else:
+    #     print("请求异常")
+
+    # 热点新闻
+    url = 'https://top.news.sina.com.cn/ws/GetTopDataList.php?top_type=day&top_cat=news_society_suda&top_time=today&top_show_num=30&top_order=DESC'
+    f = urllib.urlopen(url)
+    content = f.read()
+    res = content[11:-2]
+    res =  json.loads(res)
+    if res:
+        top = res['data']
+    else:
+        top = []
+
+        # 国际新闻
+    url = 'https://top.news.sina.com.cn/ws/GetTopDataList.php?top_type=day&top_cat=gjxwpl&top_time=today&top_show_num=60&top_order=DESC'
+    f = urllib.urlopen(url)
+    content = f.read()
+    res = content[11:-2]
+    res = json.loads(res)
+    if res:
+        guoji = res['data']
+    else:
+        guoji = []
+        # 国内新闻
+    url = 'https://top.news.sina.com.cn/ws/GetTopDataList.php?top_type=day&top_cat=news_china_suda&top_time=today&top_show_num=60&top_order=DESC'
+    f = urllib.urlopen(url)
+    content = f.read()
+    res = content[11:-2]
+    res = json.loads(res)
+    if res:
+        guonei = res['data']
+    else:
+        guonei = []
+        # 军事新闻
+    url = 'http://top.news.sina.com.cn/ws/GetTopDataList.php?top_type=day&top_cat=news_mil_suda&top_time=today&top_show_num=30&top_order=DESC'
+    f = urllib.urlopen(url)
+    content = f.read()
+    res = content[11:-2]
+    res = json.loads(res)
+    if res:
+        junshi = res['data']
+    else:
+        junshi = []
+        # 社会新闻
+    url = 'https://top.news.sina.com.cn/ws/GetTopDataList.php?top_type=day&top_cat=news_society_suda&top_time=today&top_show_num=60&top_order=DESC'
+    f = urllib.urlopen(url)
+    content = f.read()
+    res = content[11:-2]
+    res = json.loads(res)
+    if res:
+        shehui = res['data']
+    else:
+        shehui = []
+    content = {
+        'top':top,
+        'shehui':shehui,
+        'junshi':junshi,
+        'guonei':guonei,
+        'guoji':guoji
+    }
+    return render(request,'yellow_page.html',content)

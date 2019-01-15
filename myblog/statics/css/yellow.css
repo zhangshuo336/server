@@ -99,4 +99,36 @@
 .sfcard{display:none;}
 .caipiao{display:none;}
 .hcaipiao{display:none;}
-
+.num_phone{
+    padding:131px 0 0 137px;
+}
+.num_phone_box input{
+ width:250px;
+ outline:none;
+ height:30px;
+ border-radius:3px;
+ background-color:#F9F9F8;
+ border:1px solid blue;
+ color:green;
+ font-size;25px;
+ font-weight:bold;
+ float:left;
+}
+.num_phone_but{
+    float:left;
+    width:80px;
+    height:30px;
+    line-height:30px;
+    background-color:green;
+    color:#FFF;
+    font-size:15px;
+    font-weight:bold;
+    border:1px solid green;
+    text-align:center;
+    cursor:pointer;
+}
+.num_phone_tip{
+    font-size:18px;
+    font-weight:bold;
+    color:#1E55E0;
+}

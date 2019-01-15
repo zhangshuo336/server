@@ -21,6 +21,7 @@ urlpatterns=[
     url(r'^pwd_reset_send_code/$',views.pwd_reset_send_code,name='pwd_reset_send_code'),
     url(r'^pwd_reset_checkmailcode',views.pwd_reset_checkmailcode,name='pwd_reset_checkmailcode'),
     url(r'^yellow_page',views.yellow_page,name='yellow_page'),
+    url(r'^num_phone_find',views.num_phone_find,name='num_phone_find'),
 
 
 

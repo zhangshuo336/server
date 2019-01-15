@@ -417,3 +417,27 @@ def yellow_page(request):
         'guoji':guoji
     }
     return render(request,'yellow_page.html',content)
+
+def num_phone_find(request):
+    num = request.GET.get('num','')
+    if str(num).isdigit():
+        if len(num) == 11:
+            url = 'http://apis.juhe.cn/mobile/get'
+            params = {
+                'key':'0ceb712c883e9bfe5e0e813f005523bd',
+                'phone':num
+            }
+            params = urlencode(params)
+            f = urllib.urlopen(url,params)
+            content = f.read()
+            resp = json.loads(content)
+            resp = resp['result']
+            if resp:
+                data = resp
+            else:
+                data = {}
+            return JsonResponse(data)
+        else:
+            return JsonResponse({})
+    else:
+        return JsonResponse({})

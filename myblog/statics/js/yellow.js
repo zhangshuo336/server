@@ -54,4 +54,20 @@ $(function(){
     $('.hcaipiao').show();
     $('.hcaipiao').siblings().hide();
     });
+//    电话号码查询
+    $('.num_phone_but').click(function(){
+        var num = $('.num_phone_input').val();
+        $.get('/num_phone_find/','num='+num,function(data){
+        if(data.province){$('.num_phone_tip').html(data.province+'省 '+data.city+'市 '+data.company+'    区号:'+data.areacode+' 邮编:'+data.zip)}
+        else{$('.num_phone_tip').html("Wrong phone number!")}
+        })
+    });
+
+    $('.ip_but').click(function(){
+        var num = $('.ip_input').val();
+        $.get('/ip_find/','num='+num,function(data){
+        if(data.province){$('.num_phone_tip').html(data.province+'省 '+data.city+'市 '+data.company+'    区号:'+data.areacode+' 邮编:'+data.zip)}
+        else{$('.num_phone_tip').html("Wrong phone number!")}
+        })
+    });
 })

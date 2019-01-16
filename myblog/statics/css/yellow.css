@@ -5,10 +5,12 @@
     font-size:0;
     width:100%
 
+
 }
 .yel_tag{
     float:left;
-    width:100%
+    width:100%;
+
     }
 .yel_tag li{
     padding:0;
@@ -21,9 +23,10 @@
     color:#FFF;
     font-size:15px;
     font-weight:bold;
-    padding:12px 8px;
+    padding:5px 8px;
     text-align:center;
     cursor:pointer;
+    border-radius:20px;
 }
 .yel_tag li:first-child{
     background-color:transparent;
@@ -175,7 +178,8 @@
     height:30px;
     outline:none;
     border: 1px solid blue;
-    border-radius:5px;
+    border-top-left-radius:5px;
+    border-bottom-left-radius:5px;
     float:left;
 }
 
@@ -189,7 +193,8 @@
     font-weight:bold;
     font-size:15px;
     float:left;
-    border-radius:5px;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:5px;
     text-align:center;
     cursor:pointer;
 }

@@ -26,7 +26,7 @@ urlpatterns=[
     url(r'^shici_search/$',views.shici_search,name='shici_search'),
     url(r'shici_search_title',views.shici_search_title,name='shici_search_title'),
     url(r'shici_search_authors',views.shici_search_authors,name='shici_search_authors'),
-
+    url(r'about_me',views.about_me,name='about_me'),
 
 
 ]

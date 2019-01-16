@@ -340,7 +340,7 @@ def loginVerifyTest(request):
 def user_center(request):
     id = request.session.get('userid')
     user = User.objects.get(id=id)
-    content = {'user':user}
+    content = {'user':user,'pageTitle':'七月-用户中心'}
     return render(request,"user_center.html",content)
 
 def yellow_page(request):
@@ -414,7 +414,8 @@ def yellow_page(request):
         'shehui':shehui,
         'junshi':junshi,
         'guonei':guonei,
-        'guoji':guoji
+        'guoji':guoji,
+        'pageTitle':'七月-生活服务'
     }
     return render(request,'yellow_page.html',content)
 
@@ -508,3 +509,6 @@ def shici_search_authors(request):
     }
     resp = [resp]
     return JsonResponse(resp, safe=False)
+
+def about_me(request):
+    return render(request,'about_me.html',{'pageTitle':'关于我'})

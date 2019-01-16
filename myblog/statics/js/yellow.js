@@ -63,11 +63,47 @@ $(function(){
         })
     });
 
-    $('.ip_but').click(function(){
+    $('#ip_but').click(function(){
         var num = $('.ip_input').val();
         $.get('/ip_find/','num='+num,function(data){
-        if(data.province){$('.num_phone_tip').html(data.province+'省 '+data.city+'市 '+data.company+'    区号:'+data.areacode+' 邮编:'+data.zip)}
-        else{$('.num_phone_tip').html("Wrong phone number!")}
+        if(data.area){$('#ip_tip').html(data.area+'    '+data.location)}
+        else{$('#ip_tip').html("Wrong IP number!")}
         })
+    });
+
+    $('#shici_search_but').click(function(){
+        var msg = $('#shici_search_input').val();
+        var str = '';
+        $.get('/shici_search/','msg='+msg,function(data){
+            for (var i=0;i<data.length;i++){
+               str+='<div class="shici_box"><div class="shici_title">'+data[i].title+'</div><div class="shici_author">'+data[i].authors+'</div><div class="shici_word">'+data[i].content.replace(/\|/g,'<br>')+'</div></div>';
+//            alert(data[i].content.replace(/\|/,'<br>'));
+            }
+            $('.shici_content').html(str);
+        });
+    });
+
+    $('#shici_search_but_title').click(function(){
+        var msg = $('#shici_search_input_title').val();
+        var str = '';
+        $.get('/shici_search_title/','msg='+msg,function(data){
+            for (var i=0;i<data.length;i++){
+               str+='<div class="shici_box"><div class="shici_title">'+data[i].title+'</div><div class="shici_author">'+data[i].authors+'</div><div class="shici_word">'+data[i].content.replace(/\|/g,'<br>')+'</div></div>';
+//            alert(data[i].content.replace(/\|/,'<br>'));
+            }
+            $('.shici_content').html(str);
+        });
+    });
+
+    $('#shici_search_but_authors').click(function(){
+        var msg = $('#shici_search_input_authors').val();
+        var str = '';
+        $.get('/shici_search_authors/','msg='+msg,function(data){
+            for (var i=0;i<data.length;i++){
+               str+='<div class="shici_box"><div class="shici_title">'+data[i].name+'</div><div class="authors_word">'+data[i].desc+'</div></div>';
+//            alert(data[i].content.replace(/\|/,'<br>'));
+            }
+            $('.shici_content').html(str);
+        });
     });
 })

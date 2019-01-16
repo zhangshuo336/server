@@ -441,3 +441,70 @@ def num_phone_find(request):
             return JsonResponse({})
     else:
         return JsonResponse({})
+
+def ip_find(request):
+    ip = request.GET.get('num','')
+    if re.match(r'(2(5[0-5]{1}|[0-4]\d{1})|[0-1]?\d{1,2})(\.(2(5[0-5]{1}|[0-4]\d{1})|[0-1]?\d{1,2})){3}$',ip):
+        url = "http://apis.juhe.cn/ip/ip2addr"
+        params = {
+            "ip": ip,  # 需要查询的IP地址或域名
+            "key": "47285fd589de069f554c2717c98bda50",  # 应用APPKEY(应用详细页查询)
+        }
+        params = urlencode(params)
+        f = urllib.urlopen(url, params)
+        content = f.read()
+        res = json.loads(content)
+        res = res['result']
+        if res:
+            return JsonResponse(res)
+        else:
+            return JsonResponse({})
+    else:
+        return JsonResponse({})
+
+def shici_search(request):
+    msg = request.GET.get('msg','').encode('utf-8')
+    url = 'https://api.apiopen.top/likePoetry?name='+msg
+    # params = {
+    #     'name':msg
+    # }
+    # # params = urlencode(params)
+    f = urllib.urlopen(url)
+    content = f.read().decode('utf-8')
+    resp = json.loads(content)
+    resp = resp['result']
+    return JsonResponse(resp,safe=False)
+
+def shici_search_title(request):
+    msg = request.GET.get('msg', '').encode('utf-8')
+    url = 'https://api.apiopen.top/searchPoetry?name=' + msg
+    # params = {
+    #     'name':msg
+    # }
+    # # params = urlencode(params)
+    f = urllib.urlopen(url)
+    content = f.read().decode('utf-8')
+    resp = json.loads(content)
+    resp = resp['result']
+    return JsonResponse(resp, safe=False)
+
+def shici_search_authors(request):
+    msg = request.GET.get('msg', '').encode('utf-8')
+    url = 'https://api.apiopen.top/searchAuthors?name=' + msg
+    # params = {
+    #     'name':msg
+    # }
+    # # params = urlencode(params)
+    f = urllib.urlopen(url)
+    content = f.read().decode('utf-8')
+    resp = json.loads(content)
+    resp = resp['result']
+    resp = resp[0]
+    name = resp['name']
+    desc = resp['desc'].split()[0]
+    resp = {
+        'name':name,
+        'desc':desc
+    }
+    resp = [resp]
+    return JsonResponse(resp, safe=False)

@@ -132,3 +132,69 @@
     font-weight:bold;
     color:#1E55E0;
 }
+.ip{padding:131px 0 0 137px;}
+.ip_box input{
+ width:250px;
+ outline:none;
+ height:30px;
+ border-radius:3px;
+ background-color:#F9F9F8;
+ border:1px solid blue;
+ color:green;
+ font-size;25px;
+ font-weight:bold;
+ float:left;
+}
+.shici_search{
+    float:left;
+    margin:5px 0;
+}
+.shici_content{
+    width:600px;
+    margin:0 auto;
+
+}
+.shici_box{
+    width:300px;
+    float:left;
+    text-align:center;
+}
+.shici_title{
+    text-align:center;
+    font-size:15px;
+    color:blue;
+    font-weight:bold;
+
+}
+.shici_author{
+    text-align:center;
+    font-weight:bold;
+}
+.shici_search_input{
+    width:496px;
+    height:30px;
+    outline:none;
+    border: 1px solid blue;
+    border-radius:5px;
+    float:left;
+}
+
+.shici_search_but{
+    width:100px;
+    height:30px;
+    line-height:30px;
+    border:1px solid blue;
+    background-color:blue;
+    color:#FFF;
+    font-weight:bold;
+    font-size:15px;
+    float:left;
+    border-radius:5px;
+    text-align:center;
+    cursor:pointer;
+}
+.authors_word{
+    width:600px;
+    text-align:left;
+    text-indent:30px;
+}

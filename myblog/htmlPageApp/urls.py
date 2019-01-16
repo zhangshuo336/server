@@ -19,9 +19,13 @@ urlpatterns=[
     url(r'^loginVerifyTest/$', views.loginVerifyTest, name='loginVerifyTest'),
     url(r'^user_center/$',views.user_center,name="user_center"),
     url(r'^pwd_reset_send_code/$',views.pwd_reset_send_code,name='pwd_reset_send_code'),
-    url(r'^pwd_reset_checkmailcode',views.pwd_reset_checkmailcode,name='pwd_reset_checkmailcode'),
-    url(r'^yellow_page',views.yellow_page,name='yellow_page'),
-    url(r'^num_phone_find',views.num_phone_find,name='num_phone_find'),
+    url(r'^pwd_reset_checkmailcode/$',views.pwd_reset_checkmailcode,name='pwd_reset_checkmailcode'),
+    url(r'^yellow_page/$',views.yellow_page,name='yellow_page'),
+    url(r'^num_phone_find/$',views.num_phone_find,name='num_phone_find'),
+    url(r'^ip_find/$',views.ip_find,name='ip_find'),
+    url(r'^shici_search/$',views.shici_search,name='shici_search'),
+    url(r'shici_search_title',views.shici_search_title,name='shici_search_title'),
+    url(r'shici_search_authors',views.shici_search_authors,name='shici_search_authors'),
 
 
 

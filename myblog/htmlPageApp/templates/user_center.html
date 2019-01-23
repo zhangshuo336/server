@@ -34,7 +34,7 @@
 <div class="artdetail">
     <div id="mycontent">
         <div class="headpic">{%if user.userPic == 'a'%}<img src="/statics/usermedia/siteinit.jpg" alt="头像" id="img">{%else%}<img src="{{user.userPic}}" alt="头像" id="img">{%endif%}</div>
-        <div class="picre">头像建议大小100*100像素</div>
+        <div class="picre">头像建议大小40*40像素</div>
         <div class="regbox">
             <form action="{%url 'user:rescUserMsg'%}" method="post" enctype="multipart/form-data" id="usermsg">
                 {%csrf_token%}

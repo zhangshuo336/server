@@ -345,5 +345,23 @@ color:#1E55E0;
 .historyitem{
 color:#ff3300;
 }
-
+.login_img_btn{
+    width:86px;
+    height:60px;
+    float:left;
+    overflow:hidden;
+    border:1px solid black;
+    box-sizing:border-box;
+    text-align:center;
+    cursor:pointer;
+    padding-top:10px;
+}
+.btn_img{
+    width:30px;
+    height:38px;
+}
+.weibo_btn_img{
+    width:55px;
+    height:45px;
+}
 

@@ -17,11 +17,11 @@ import random
 from tonApp.models import Ton
 from django.template import RequestContext
 import re
-import json, urllib
+import json, urllib,urllib2
 from urllib import urlencode
 from models import visitLog
+from django.core.urlresolvers import reverse
 from django.views.decorators.cache import cache_page
-
 # 装饰器用于对用户登陆状态的检测
 def loginTest(func):
     def loginCheck(request,*args,**kwargs):
@@ -512,3 +512,71 @@ def shici_search_authors(request):
 
 def about_me(request):
     return render(request,'about_me.html',{'pageTitle':'关于我'})
+
+# 返回QQ登陆界面
+def qq_login_page(request):
+    state = random.randint(100000,999999)
+    print (state)
+    request.session['state'] = state
+    client_id = '101544383'
+    callback = 'http%3a%2f%2f127.0.0.1%3a8000%2fqq_login'
+    login_url = 'https://graph.qq.com/oauth2.0/authorize?display=mobile&response_type=code&client_id=%s&redirect_uri=%s&state=%s'%(client_id, callback, state)
+    # login_url = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101544383&redirect_uri=http%3a%2f%2f127.0.0.1%3a8000%2fqq_login&state = 236597'
+    # url = 'https://graph.qq.com/oauth2.0/authorize'
+    # params = {
+    #     'response_type':'code',
+    #     'client_id':client_id,
+    #     'redirect_uri':callback,
+    #     'state':state
+    # }
+    # login_url = urllib.urlencode()
+    return HttpResponseRedirect(login_url)
+
+def parse_jsonp(jsonp_str):
+    try:
+        return re.search(r'^[^(]*?\((.*)\)[^)]*$', jsonp_str).group(1)
+    except:
+        raise ValueError('无效数据！')
+# 获取QQ用户信息
+def qq_login(request):
+    if int(request.session['state']) == int(request.GET['state']):
+        code = request.GET['code']
+        client_id = '101544383'
+        client_secret = 'b8faa3df6d90f0d3d9e8b3450af9d256'
+        callback = 'http%3a%2f%2f127.0.0.1%3a8000%2fqq_login'
+        login_url = 'https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&code=%s&client_id=%s&client_secret=%s&redirect_uri=%s'% (code, client_id, client_secret, callback)
+        response = urllib2.urlopen(login_url).read().decode()
+        access_token = re.split('&', response)[0]
+        res = urllib2.urlopen('https://graph.qq.com/oauth2.0/me?' + access_token).read()
+        openid = json.loads(parse_jsonp(res))['openid']
+        userinfo = urllib2.urlopen('https://graph.qq.com/user/get_user_info?oauth_consumer_key=%s&openid=%s&%s' % (client_id, openid, access_token)).read()
+        userinfo = json.loads(userinfo)
+        if User.objects.filter(userName=openid).count():
+            request.session['uname'] = User.objects.get(userName=openid).loveName
+            request.session['userid'] = User.objects.get(userName=openid).id
+            return HttpResponseRedirect(reverse('htmlPageApp:index'))
+        else:
+            u = User()
+            u.userName = openid
+            mysha1 = sha1()
+            mysha1.update('000000')
+            passwd = mysha1.hexdigest()
+            u.password = passwd
+            u.loveName = userinfo['nickname']
+            if userinfo['gender'] == '女':
+                u.gender = False
+            else:
+                u.gender = True
+            u.age = int(userinfo['year'])
+            u.userPic = userinfo['figureurl_qq_1']
+            u.email = 'a'
+            u.save()
+            request.session['uname'] = userinfo['nickname']
+            request.session['userid'] = User.objects.get(userName=openid).id
+            return HttpResponseRedirect(reverse('htmlPageApp:index'))
+    else:
+        return HttpResponse('error')
+
+        # 微信第三方登陆代码
+def wechat_page(request):
+    pass

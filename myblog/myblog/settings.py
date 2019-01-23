@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '19km(#qqi=hv2)m4$=4vpfs+etl6935zg$_s2#qxa3dr_jjet6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -88,7 +88,7 @@ DATABASES = {
         'HOST':'localhost',
         'PORT':3306,
         'USER':'root',
-        'PASSWORD':'********',
+        'PASSWORD':'mysql',
     }
 }
 
@@ -131,6 +131,6 @@ USE_TZ = True
 
 STATIC_URL = '/statics/'
 STATICFILES_DIRS=[os.path.join(BASE_DIR,'statics')]
-# MEDIA_ROOT = os.path.join(BASE_DIR,'statics/media')
-MEDIA_ROOT = '/var/www/static/myblog/statics/media'
-STATIC_ROOT = '/var/www/static/myblog/statics'
+MEDIA_ROOT = os.path.join(BASE_DIR,'statics/media')
+# MEDIA_ROOT = '/var/www/static/myblog/statics/media'
+# STATIC_ROOT = '/var/www/static/myblog/statics'

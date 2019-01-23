@@ -2,7 +2,7 @@ from django.db import models
 from artDataApp.models import ArtData
 # Create your models here.
 class User(models.Model):
-    userName = models.CharField(max_length=20,unique=True)
+    userName = models.CharField(max_length=40,unique=True)
     password = models.CharField(max_length=40)
     loveName = models.CharField(max_length=20)
     gender  = models.BooleanField(default=True)

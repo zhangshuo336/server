@@ -21,6 +21,8 @@ import json, urllib,urllib2
 from urllib import urlencode
 from models import visitLog
 from django.core.urlresolvers import reverse
+from django.conf import settings
+import requests
 from django.views.decorators.cache import cache_page
 # 装饰器用于对用户登陆状态的检测
 def loginTest(func):
@@ -516,11 +518,10 @@ def about_me(request):
 # 返回QQ登陆界面
 def qq_login_page(request):
     state = random.randint(100000,999999)
-    print (state)
     request.session['state'] = state
     client_id = '101544383'
     callback = 'http%3a%2f%2f127.0.0.1%3a8000%2fqq_login'
-    login_url = 'https://graph.qq.com/oauth2.0/authorize?display=mobile&response_type=code&client_id=%s&redirect_uri=%s&state=%s'%(client_id, callback, state)
+    login_url = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=%s&redirect_uri=%s&state=%s'%(client_id, callback, state)
     # login_url = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101544383&redirect_uri=http%3a%2f%2f127.0.0.1%3a8000%2fqq_login&state = 236597'
     # url = 'https://graph.qq.com/oauth2.0/authorize'
     # params = {
@@ -580,3 +581,62 @@ def qq_login(request):
         # 微信第三方登陆代码
 def wechat_page(request):
     pass
+def sina_login_page(request):
+    state = random.randint(100000, 999999)
+    request.session['sina_state'] = state
+    client_id = settings.SINA_APP_KEY
+    callback = 'http://127.0.0.1:8000/sina_login'
+    login_url = 'https://api.weibo.com/oauth2/authorize?client_id=%s&redirect_uri=%s&state=%s' % (client_id, callback, state)
+    return HttpResponseRedirect(login_url)
+def sina_login(request):
+    if int(request.session['sina_state']) == int(request.GET['state']):
+        code = request.GET['code']
+        client_id = settings.SINA_APP_KEY
+        client_secret = settings.SINA_APP_SECRET
+        callback = 'http://127.0.0.1:8000/sina_login'
+        url = 'https://api.weibo.com/oauth2/access_token'
+        params={
+            "client_id":client_id,
+            "client_secret":client_secret,
+            "code":code,
+            "grant_type":"authorization_code",
+            "redirect_uri":callback
+        }
+        # params = urllib.urlencode(params)
+        # requ= urllib2.Request(url,data=params)
+        # response = urllib2.urlopen(requ)
+        response = requests.post(url,data=params)
+        # print (response.json()['uid'])
+        usermsg_info_url = 'https://api.weibo.com/2/users/show.json'
+        data={
+            'access_token':response.json()['access_token'],
+            'uid':response.json()['uid']
+        }
+        response = requests.get(usermsg_info_url,params=data)
+        # print (response)
+        # return HttpResponse(response)
+        if User.objects.filter(userName=response.json()['idstr']).count():
+            request.session['uname'] = User.objects.get(userName=response.json()['idstr']).loveName
+            request.session['userid'] = User.objects.get(userName=response.json()['idstr']).id
+            return HttpResponseRedirect(reverse('htmlPageApp:index'))
+        else:
+            u = User()
+            u.userName = response.json()['idstr']
+            mysha1 = sha1()
+            mysha1.update('000000')
+            passwd = mysha1.hexdigest()
+            u.password = passwd
+            u.loveName = response.json()['name']
+            if response.json()['gender'] == 'f':
+                u.gender = False
+            else:
+                u.gender = True
+            u.age = 1
+            u.userPic = response.json()['profile_image_url']
+            u.email = 'a'
+            u.save()
+            request.session['uname'] = response.json()['name']
+            request.session['userid'] = User.objects.get(userName=response.json()['idstr']).id
+            return HttpResponseRedirect(reverse('htmlPageApp:index'))
+    else:
+        return HttpResponse('ERROR')

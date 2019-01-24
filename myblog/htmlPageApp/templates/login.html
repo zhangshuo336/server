@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="/statics/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="/statics/css/login.css">
 	<link rel="shortcut icon" href="/statics/images/favicon.ico" />
+	<link rel="stylesheet" href="/statics/css/font-awesome.min.css">
     <script src="/statics/js/jquery-1.12.4.min.js"></script>
 	<script src="/statics/js/login.js"></script>
     <script>
@@ -25,8 +26,6 @@
 </head>
 <body>
 	<div class="body">
-
-
 		<div class="login_form fr">
 				<div class="login_title clearfix">
 					<h1>七月-登录</h1>
@@ -47,6 +46,10 @@
 							<a href="{%url 'user:pwd_reset'%}">忘记密码</a>
 						</div>
 						<input type="submit" name="" value="登录" class="input_submit">
+
+						<a href="{%url 'htmlPageApp:qq_login_page'%}"><div class="three_login qq_three_login"><i class="fa fa-qq" aria-hidden="true"></i>&nbsp;&nbsp;QQ登陆</div></a>
+						<div class="three_login wechat_three_login"><i class="fa fa-weixin" aria-hidden="true"></i>&nbsp;&nbsp;微信登陆</div>
+						<a href="{%url 'htmlPageApp:sina_login_page'%}"><div class="three_login sina_three_login"><i class="fa fa-weibo" aria-hidden="true"></i>&nbsp;&nbsp;微博登陆</div></a>
 					</form>
 				</div>
 			</div>

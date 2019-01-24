@@ -128,6 +128,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
+SINA_APP_KEY = '1373219147'
+SINA_APP_SECRET = '9724cf0c9d98f37bc7f6a0c16c5c7267'
 
 STATIC_URL = '/statics/'
 STATICFILES_DIRS=[os.path.join(BASE_DIR,'statics')]

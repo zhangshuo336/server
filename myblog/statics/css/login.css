@@ -1,5 +1,5 @@
 body{background-image: url(../images/background.jpg);}
-.login_form{width:368px;height:378px;border:1px solid #c6c6c5;margin:50px auto 0; color: #fff;}
+.login_form{width:368px;height:600px;border:1px solid #c6c6c5;margin:50px auto 0; color: #fff;}
 
 .login_title{height:60px;width:308px;margin:10px auto;border-bottom:1px solid #e0e0e0;}
 
@@ -25,6 +25,12 @@ body{background-image: url(../images/background.jpg);}
 .more_input a{float:right;color:#fff;}
 .more_input a:hover{color:#ff8800}
 
-.input_submit{width:100%;height:40px;position:absolute;left:0;top:230px;background-color:#47aa34;color:#fff;font-size:22px;border:0px;font-family:'Microsoft Yahei';cursor:pointer;}
+.input_submit{border-radius:2px;width:100%;height:40px;position:absolute;left:0;top:230px;background-color:#47aa34;color:#fff;font-size:22px;border:0px;font-family:'Microsoft Yahei';cursor:pointer;}
 h1{margin:0;padding: 0;}
 a{text-decoration: none;}
+.three_login{
+    line-height:40px;border-radius:2px;text-align:center;width:100%;height:40px;position:absolute;left:0;background-color:#47aa34;color:#fff;font-size:18px;border:0px;font-family:'Microsoft Yahei';cursor:pointer;
+}
+.qq_three_login{top:300px;background-color:#1D89FC;}
+.wechat_three_login{top:360px;background-color:#17D21A;}
+.sina_three_login{top:420px;background-color:#FC4618;}

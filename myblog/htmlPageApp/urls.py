@@ -29,7 +29,8 @@ urlpatterns=[
     url(r'about_me',views.about_me,name='about_me'),
     url(r'^qq_login_page/$',views.qq_login_page,name='qq_login_page'),
     url(r'^qq_login/$',views.qq_login,name='qq_login'),
-
+    url(r'^sina_login_page/$',views.sina_login_page,name='sina_login_page'),
+    url(r'^sina_login/$', views.sina_login, name='sina_login'),
 
 
 ]

@@ -1,28 +1,28 @@
 #coding=utf-8
+import uuid
+import cStringIO
+import smtplib
+import time
+import random
+import re
+import json, urllib,urllib2
+import requests
 from django.shortcuts import render,render_to_response
 from artDataApp.models import ArtData
 from django.core.paginator import Paginator
 from createCode.myCreate import picChecker
-import uuid
-import cStringIO
 from django.http import HttpResponseRedirect,HttpResponse,JsonResponse
 from django.core.urlresolvers import reverse
 from blogUserApp.models import User
 from hashlib import sha1
-import smtplib
 from email.mime.text import MIMEText
 from email.utils import formataddr
-import time
-import random
 from tonApp.models import Ton
 from django.template import RequestContext
-import re
-import json, urllib,urllib2
 from urllib import urlencode
 from models import visitLog
 from django.core.urlresolvers import reverse
 from django.conf import settings
-import requests
 from django.views.decorators.cache import cache_page
 # 装饰器用于对用户登陆状态的检测
 def loginTest(func):

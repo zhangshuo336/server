@@ -1,8 +1,7 @@
 #coding=utf-8
-from django.shortcuts import render
 import os
+from django.shortcuts import render
 from myblog import settings
-# Create your views here.
 from models import User
 from django.http import HttpResponse,HttpResponseRedirect
 from django.core.urlresolvers import reverse
